@@ -1,0 +1,73 @@
+@import '~antd/dist/antd.less';
+@import './_reset.less';
+.clearfix:after {
+    content: '';
+    visibility: hidden;
+    height: 0;
+    display: block;
+    clear: both;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #f5f5f5;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.t-align {
+    text-align: center;
+}
+
+.t-l {
+    text-align: left;
+}
+
+.t-r {
+    text-align: right;
+}
+
+.relative {
+    position: relative;
+}
+
+.full-w {
+    width: 100%;
+}
+a,
+button,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+    background-color: @page-background-color !important;
+    .ftw !important;
+}
+
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
+
+#__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#Container {
+    flex: 1;
+}

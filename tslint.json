@@ -1,0 +1,131 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {
+    "no-console": false,
+    "class-name": true,
+    "no-var-keyword": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-arg": true,
+    "curly": false,
+    "arrow-parens": true,
+    "quotemark": [
+      false
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "arrays": "ignore",
+          "exports": "ignore",
+          "objects": "ignore",
+          "functions": "never",
+          "imports": "never",
+          "typeLiterals": "never"
+        }
+      }
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "object-literal-sort-keys": false,
+    "object-literal-key-quotes": false,
+    "object-literal-shorthand": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "prefer-const": true,
+    "forin": true,
+    "import-blacklist": true,
+    "import-spacing": true,
+    "arrow-return-shorthand": true,
+    "deprecation": true,
+    "jsdoc-format": true
+  },
+  "rules": {
+    "jsdoc-format": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "arrays": "ignore",
+          "exports": "ignore",
+          "objects": "ignore",
+          "functions": "never",
+          "imports": "never",
+          "typeLiterals": "never"
+        }
+      }
+    ],
+    "deprecation": true,
+    "no-default-export": false,
+    "arrow-return-shorthand": true,
+    "curly": false,
+    "no-arg": true,
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "import-spacing": true,
+    "no-duplicate-variable": true,
+    "no-null-keyword": false,
+    "import-blacklist": true,
+    "typedef-whitespace": true,
+    "no-return-await": true,
+    "no-unused-variable": true,
+    "no-unused-expression": true,
+    "no-empty": true,
+    "prefer-const": true,
+    "no-eval": true,
+    "no-var-keyword": true,
+    "no-empty-interface": true,
+    "await-promise": true,
+    "object-literal-sort-keys": false,
+    "variable-name": false,
+    "max-line-length": false,
+    "interface-over-type-literal": false,
+    "no-shadowed-variable": false,
+    "no-var-requires": false,
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "quotemark": [
+      false
+    ],
+    "ordered-imports": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-console": false,
+    "interface-name": false,
+    "no-bitwise": false,
+    "one-variable-per-declaration": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "forin": true
+  },
+  "rulesDirectory": [
+    "src",
+    "pages"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "**/node_modules/**",
+      "coverage",
+      ".next",
+      "**/dist/**",
+      "**/types/**",
+      "**/src/server",
+      ".babelrc"
+    ]
+  }
+}

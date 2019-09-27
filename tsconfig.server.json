@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "module": "commonjs",
+      "outDir": ".next/dist",
+      "target": "es2017",
+      "sourceMap": false,
+      "lib": [
+        "es2017"
+      ],
+      "paths": {
+        "~/*": ["src/*"],
+        "@/*": ["src/client/*"]
+      },
+    },
+    "include": ["src/server/**/*"]
+}
