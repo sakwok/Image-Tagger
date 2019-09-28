@@ -108,7 +108,7 @@ export const addHashTag = (id: string | string[]) => {
     }
 }
 
-export const fileListToArray = (fileList) => {
+export const fileListToArray =fileList => {
     const files = []
     for (let i = 0; i < fileList.length; i++) {
         files.push(fileList.item(i))

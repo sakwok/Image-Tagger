@@ -20,13 +20,13 @@ export const UploadImages: React.FC<UploadImagesProps> = ({ displayModal, closeM
 
   const inputUploadRef = useRef(null)
 
-  const addFiles = (e) => {
+  const addFiles = e => {
     const formFiles = e.target.files
     const files = fileListToArray(formFiles)
     setFileList([...fileList, ...files])
   }
 
-  const removeFile = (index) => () => {
+  const removeFile = index => () => {
     const cleanFileList = [...fileList]
     cleanFileList.splice(index, 1)
     setFileList(cleanFileList)
@@ -36,25 +36,25 @@ export const UploadImages: React.FC<UploadImagesProps> = ({ displayModal, closeM
     inputUploadRef.current.click()
   }
 
-  const onFileDrop = (e) => {
+  const onFileDrop = e => {
     e.preventDefault()
     const dropFileList = fileListToArray(e.dataTransfer.files)
     setFileList([...fileList, ...dropFileList])
     setDropActive(false)
   }
 
-  const onFileDragOver = (e) => {
+  const onFileDragOver = e => {
     e.preventDefault()
     setDropActive(true)
   }
 
-  const onFileDragLeave = (e) => {
+  const onFileDragLeave = e => {
     e.preventDefault()
     setDropActive(false)
   }
 
   const onModalComplete = () => {
-    const imageUrls = fileList.map((file) => window.URL.createObjectURL(file))
+    const imageUrls = fileList.map(file => window.URL.createObjectURL(file))
     closeModal()
     if (fileList.length > 0) {
       dispatch(setUploadedImages(imageUrls))
