@@ -31,6 +31,19 @@
             "removeImport": true
           }
         ],
+        [
+          "module-resolver",
+          {
+            "root": [
+              "./"
+            ],
+            "alias": {
+              "~": "./src",
+              "@": "./src/client",
+              "static": "./static"
+            }
+          }
+        ]
       ]
     },
     "test": {

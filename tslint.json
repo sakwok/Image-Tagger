@@ -84,7 +84,7 @@
     "prefer-const": true,
     "no-eval": true,
     "no-var-keyword": true,
-    "no-empty-interface": true,
+    "no-empty-interface": false,
     "await-promise": true,
     "object-literal-sort-keys": false,
     "variable-name": false,

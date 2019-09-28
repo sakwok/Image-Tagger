@@ -4,15 +4,15 @@ metadata:
   annotations:
     service.beta.kubernetes.io/alicloud-loadbalancer-cert-id: 1835243641658707_16d1a99cd4c_134857320_2145275193
     service.beta.kubernetes.io/alicloud-loadbalancer-protocol-port: "https:443"
-  name: clash-royale-fe-prod
+  name: label-system-fe-prod
   namespace: default
 spec:
   ports:
-  - name: clash-royale-fe-prod-port
+  - name: label-system-fe-prod-port
     port: 443
     protocol: TCP
-    targetPort: 9996
+    targetPort: 9995
   selector:
-    app: us-corp-team-clash-royale
+    app: us-corp-team-label-system
   sessionAffinity: None
   type: LoadBalancer

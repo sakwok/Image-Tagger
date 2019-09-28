@@ -41,7 +41,8 @@ module.exports = withPlugins([withTypescript, [withLess, {
     config.resolve.alias = {
       ...config.resolve.alias,
       '~': resolve('src'),
-      '@': resolve('src/client')
+      '@': resolve('src/client'),
+      static: resolve('static/')
     }
     config.output.jsonpFunction = `__${humps.pascalize(name)}WebpackJsonp__`
     config.resolve.extensions.push('.less')

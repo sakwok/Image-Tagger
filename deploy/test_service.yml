@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
- name: clash-royale-fe-test
+ name: label-system-fe-test
 spec:
  ports:
- - port: 9996
-   targetPort: 9996
+ - port: 9995
+   targetPort: 9995
    protocol: TCP
-   name: clash-royale-fe-test-port
+   name: label-system-fe-test-port
  selector:
-   app: us-corp-team-clash-royale
+   app: us-corp-team-label-system
  type: LoadBalancer

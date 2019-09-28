@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import Header from '@/components/Header'
+import { Header } from '@/components/Header'
 import Footer from '@/components/Footer'
 import i18n from '@/utils/i18n'
 import moment from 'moment'
@@ -30,7 +30,7 @@ export default class extends Component<LayoutProps, any> {
     render() {
         return (
             <Fragment>
-                <Header title='Header' style={{ textAlign: 'center', lineHeight: 3 }} />
+                <Header />
                 <section id='Container'>
                     {this.props.children}
                 </section>

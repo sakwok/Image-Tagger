@@ -12,5 +12,5 @@ interface Props {
 }
 
 export default (props: Props) => (
-    <div style={props.style}>{ props.title }</div>
+    <div style={props.style}></div>
 )

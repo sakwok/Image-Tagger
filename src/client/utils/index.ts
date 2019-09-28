@@ -107,3 +107,11 @@ export const addHashTag = (id: string | string[]) => {
         return id.map(player => `#${player}`).join(',')
     }
 }
+
+export const fileListToArray = (fileList) => {
+    const files = []
+    for (let i = 0; i < fileList.length; i++) {
+        files.push(fileList.item(i))
+    }
+    return files
+}

@@ -1,7 +1,7 @@
 {
-  "name": "clash-royale",
+  "name": "label-system",
   "version": "0.0.1",
-  "description": "clash-royale",
+  "description": "label-system",
   "scripts": {
     "test": "jest",
     "predev": "rimraf .next",
