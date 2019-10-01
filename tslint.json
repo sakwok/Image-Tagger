@@ -80,7 +80,7 @@
     "no-return-await": true,
     "no-unused-variable": true,
     "no-unused-expression": true,
-    "no-empty": true,
+    "no-empty": false,
     "prefer-const": true,
     "no-eval": true,
     "no-var-keyword": true,

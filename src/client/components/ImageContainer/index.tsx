@@ -23,7 +23,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
 
   useEffect(
     () => {
-      const updateWindowDimensions =e => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
+      const updateWindowDimensions = e => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
       window.addEventListener('resize', debounce(updateWindowDimensions, 500))
       return window.removeEventListener('resize', updateWindowDimensions)
     }
