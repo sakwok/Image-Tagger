@@ -23,7 +23,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
 
   useEffect(
     () => {
-      const updateWindowDimensions = (e) => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
+      const updateWindowDimensions =e => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
       window.addEventListener('resize', debounce(updateWindowDimensions, 500))
       return window.removeEventListener('resize', updateWindowDimensions)
     }
@@ -34,7 +34,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
     <div className="image-container-wrap">
       <div className="image-wrap">
         <img className="main-image" ref={imageRef} src={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
-        <canvas className="main-canvas" style={{ top: 0, left: imageBoundaries.left - 10 }} width={imageBoundaries.width} height={imageBoundaries.height} onMouseOver={(e) => { console.log(e) }}>
+        <canvas className="main-canvas" style={{ top: 0, left: imageBoundaries.left - 10 }} width={imageBoundaries.width} height={imageBoundaries.height} onMouseOver={e => { console.log(e) }}>
 
         </canvas>
       </div>
