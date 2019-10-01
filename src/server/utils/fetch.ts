@@ -30,11 +30,8 @@ const fetch = ({
     const _guide = createGuide()
     let _url = url
     const dataApi = '/api/data'
-    const etlApi = '/api/etl'
     if (_url.indexOf(dataApi) === 0) {
         _url = `${process.env.CR_DATA_API_HOST}${url.slice(dataApi.length)}`
-    } else if (_url.indexOf(etlApi) === 0) {
-        _url = `${process.env.CR_ETL_API_HOST}${url.slice(etlApi.length)}`
     } else if (_url.indexOf(`/api`) === 0) {
         _url = `${process.env.API_HOST}${url.slice(4)}`
     }

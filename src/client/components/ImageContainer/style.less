@@ -1,0 +1,19 @@
+@imageWidth: 450px;
+
+.image-container-wrap {
+  text-align: center;
+  margin-top: 100px;
+  .image-wrap {
+    position: relative;
+    text-align: center;
+    .main-image {
+      width: @imageWidth;
+    }
+
+    .main-canvas {
+      position: absolute;
+      width: @imageWidth;
+      cursor: crosshair;
+    }
+  }
+}

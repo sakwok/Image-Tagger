@@ -1,14 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
+import dynamic from 'next/dynamic'
+
+const ImageContainer = dynamic(
+    () => import('@/components/ImageContainer/index'),
+    { ssr: false }
+)
 
 import './style.less'
 
-export default class extends Component<any, any> {
+const HomePage: React.FC<any> = () => {
 
-    render() {
-        return (
-            <section className='homePage'>
+    return (
+        <section className='homePage'>
+            <ImageContainer />
+        </section>
+    )
 
-            </section>
-        )
-    }
 }
+
+export default HomePage

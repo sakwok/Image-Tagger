@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
 
     const [menuText, setMenuText] = useState('Choose Datasets')
 
-    const onMenuItemClick =e => {
+    const onMenuItemClick = e => {
         setMenuText(e.key)
     }
 
