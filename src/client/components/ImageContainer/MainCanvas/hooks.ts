@@ -22,6 +22,7 @@ export const useCanvasDrawHandlers = (
     let y = 0
     let width = 0
     let height = 0
+    const label = ''
     if (e.clientX < startPosition[0] && e.clientY < startPosition[1]) {
       x = e.clientX - imageBoundaries.left
       y = e.clientY - imageBoundaries.top
@@ -44,7 +45,7 @@ export const useCanvasDrawHandlers = (
       height = e.clientY - startPosition[1]
     }
     setDrawnRect([...drawnRect, {
-      x, y, width, height
+      x, y, width, height, label
     }])
     setStartPosition([0, 0])
   }

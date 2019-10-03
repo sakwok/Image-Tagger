@@ -3,6 +3,14 @@ interface CanvasItems {
   setStartPosition: any
   tempPosition: number[]
   setTempPosition: any
-  drawnRect: any[]
+  drawnRect: DrawnRect[]
   setDrawnRect: any
+}
+
+interface DrawnRect {
+  x: number
+  y: number
+  width: number
+  height: number
+  label: string
 }
