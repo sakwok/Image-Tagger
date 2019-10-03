@@ -13,15 +13,14 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries }) => {
   const [tempPosition, setTempPosition] = useState([0, 0])
   const [drawnRect, setDrawnRect] = useState([])
 
-
-  const dragStartHandler = (e) => {
+  const dragStartHandler = e => {
     setStartPosition([e.clientX, e.clientY])
   }
-  const draggingHandler = (e) => {
+  const draggingHandler = e => {
     if (startPosition[0] === 0 && startPosition[1] === 0) return
     setTempPosition([e.clientX, e.clientY])
   }
-  const dragEndHandler = (e) => {
+  const dragEndHandler = e => {
     let x = 0
     let y = 0
     let width = 0
