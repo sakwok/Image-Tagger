@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { debounce } from 'lodash'
 
+import { MainCanvas } from './MainCanvas/index'
+
 import './style'
 
 interface ImageContainerProps {
@@ -34,9 +36,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
     <div className="image-container-wrap">
       <div className="image-wrap">
         <img className="main-image" ref={imageRef} src={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
-        <canvas className="main-canvas" style={{ top: 0, left: imageBoundaries.left - 10 }} width={imageBoundaries.width} height={imageBoundaries.height} onMouseOver={e => { console.log(e) }}>
-
-        </canvas>
+        <MainCanvas imageBoundaries={imageBoundaries} />
       </div>
     </div>
   )
