@@ -13,11 +13,12 @@ export default class extends Document {
                     <meta content='black' name='apple-mobile-web-app-status-bar-style' />
                     <meta content='telephone=no' name='format-detection' />
                     <meta name='msapplication-tap-highlight' content='no' />
-                    <link rel='stylesheet' href={`${process.env.FONT_LINK}`}/>
+                    <link rel='stylesheet' href={`${process.env.FONT_LINK}`} />
+                    <link rel='stylesheet' href={`${process.env.ICON_FONT_LINK}`} />
                     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
                 </Head>
                 <body>
-                    <Main/>
+                    <Main />
                     <NextScript />
                 </body>
             </html>

@@ -1,4 +1,5 @@
 import { useEffect, } from 'react'
+import ReactTooltip from 'react-tooltip'
 
 export const useCanvasDrawHandlers = (
   { startPosition,
@@ -67,4 +68,12 @@ export const useCanvasDrawHandlers = (
     dragEndHandler
   }
 
+}
+
+export const useDisplayUnlabeled = (drawnRect, iconRefs) => {
+  useEffect(() => {
+    iconRefs.forEach((_, index) => {
+      if (!drawnRect[index].label) ReactTooltip.show(iconRefs[index])
+    })
+  }, [drawnRect])
 }
