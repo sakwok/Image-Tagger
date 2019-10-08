@@ -25,7 +25,6 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
 
   const canvasRef = useRef(null)
   const { drawnRect, setDrawnRect, startPosition, tempPosition } = canvasItems
-  // const validStartPosition = startPosition[0] || startPosition[1]
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
 
   const topLeft = calcStartPosition(startPosition, tempPosition, imageBoundaries)
@@ -61,7 +60,6 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
     }
     return ratio
   }
-  console.log(drawnRect)
   const ratio = magnRatio(topLeft)
   return (
     <Fragment>
@@ -95,7 +93,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
         <span
           style={{
             display: 'inline-block',
-            backgroundImage: `url(${imageSrc})`,
+            backgroundImage: !!drawnRect[drawnRect.length - 1] ? `url(${imageSrc})` : 'url()',
             backgroundRepeat: 'no-repeat',
             width: topLeft.width * ratio,
             height: topLeft.height * ratio,

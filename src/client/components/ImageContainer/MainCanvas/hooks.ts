@@ -35,8 +35,6 @@ export const useCanvasDrawHandlers = (
   }
   const dragEndHandler = e => {
     if (startPosition[0] === 0 && startPosition[1] === 0 && tempPosition[0] === 0 && tempPosition[1] === 0) return
-    console.log('ending')
-    console.log(tempPosition)
     const label = ''
     const { x, y, width, height, } = calcStartPosition(startPosition, [e.clientX, e.clientY], imageBoundaries)
     setDrawnRect([...drawnRect, {
@@ -51,11 +49,13 @@ export const useCanvasDrawHandlers = (
     canvasCtx.strokeStyle = 'red'
     // console.log(startPosition[0] - imageBoundaries.left, startPosition[1] - imageBoundaries.top)
     canvasCtx.clearRect(0, 0, imageBoundaries.width, imageBoundaries.height)
-    canvasCtx.strokeRect(startPosition[0] - imageBoundaries.left, startPosition[1] - imageBoundaries.top, tempPosition[0] - startPosition[0], tempPosition[1] - startPosition[1])
+    if (!(startPosition[0] === 0 && startPosition[1] === 0)) {
+      canvasCtx.strokeRect(startPosition[0] - imageBoundaries.left, startPosition[1] - imageBoundaries.top, tempPosition[0] - startPosition[0], tempPosition[1] - startPosition[1])
+    }
     drawnRect.forEach(({ x, y, width, height }) => {
       canvasCtx.strokeRect(x, y, width, height)
     })
-  }, [tempPosition])
+  }, [tempPosition, drawnRect])
 
   return {
     dragStartHandler,

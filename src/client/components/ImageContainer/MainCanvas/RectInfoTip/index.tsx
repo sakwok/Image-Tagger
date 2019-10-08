@@ -41,6 +41,12 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
     setDisplayForm(true)
   }
 
+  const deleteRect = () => {
+    const copyRect = [...drawnRect]
+    copyRect.splice(index, 1)
+    setDrawnRect(copyRect)
+  }
+
   return (
     <div className="rect-info-tip-wrap">
       <ul>
@@ -68,6 +74,7 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
               : <span className="label-value" onClick={openFormInput} >{label}</span>
           }
         </li>
+        <li className="label-delete" onClick={deleteRect} >DELETE</li>
       </ul>
       <span className="close-tip" onClick={hideToolTip(index)}>X</span>
     </div>
