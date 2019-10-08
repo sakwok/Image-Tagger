@@ -1,5 +1,6 @@
-import { useEffect, } from 'react'
+import { useEffect, useState } from 'react'
 import ReactTooltip from 'react-tooltip'
+import { calcStartPosition } from '@/utils/index'
 
 export const useCanvasDrawHandlers = (
   { startPosition,
@@ -11,43 +12,37 @@ export const useCanvasDrawHandlers = (
     imageBoundaries,
     canvasRef }
 ) => {
+
+  const [isDrawing, setIsDrawing] = useState(false)
+
   const dragStartHandler = e => {
+    setTempPosition([e.clientX, e.clientY])
     setStartPosition([e.clientX, e.clientY])
+    setIsDrawing(true)
   }
+
+  const escDragging = e => {
+    if (e.keyCode === 27 && isDrawing) {
+      setStartPosition([0, 0])
+      setIsDrawing(false)
+      setTempPosition([0, 0])
+    }
+  }
+
   const draggingHandler = e => {
     if (startPosition[0] === 0 && startPosition[1] === 0) return
     setTempPosition([e.clientX, e.clientY])
   }
   const dragEndHandler = e => {
-    let x = 0
-    let y = 0
-    let width = 0
-    let height = 0
+    if (startPosition[0] === 0 && startPosition[1] === 0 && tempPosition[0] === 0 && tempPosition[1] === 0) return
+    console.log('ending')
+    console.log(tempPosition)
     const label = ''
-    if (e.clientX < startPosition[0] && e.clientY < startPosition[1]) {
-      x = e.clientX - imageBoundaries.left
-      y = e.clientY - imageBoundaries.top
-      width = startPosition[0] - e.clientX
-      height = startPosition[1] - e.clientY
-    } else if (e.clientX < startPosition[0]) {
-      x = e.clientX - imageBoundaries.left
-      y = startPosition[1] - imageBoundaries.top
-      width = startPosition[0] - e.clientX
-      height = e.clientY - startPosition[1]
-    } else if (e.clientY < startPosition[1]) {
-      x = startPosition[0] - imageBoundaries.left
-      y = e.clientY - imageBoundaries.top
-      width = e.clientX - startPosition[0]
-      height = startPosition[1] - e.clientY
-    } else {
-      x = startPosition[0] - imageBoundaries.left
-      y = startPosition[1] - imageBoundaries.top
-      width = e.clientX - startPosition[0]
-      height = e.clientY - startPosition[1]
-    }
+    const { x, y, width, height, } = calcStartPosition(startPosition, [e.clientX, e.clientY], imageBoundaries)
     setDrawnRect([...drawnRect, {
       x, y, width, height, label
     }])
+    setIsDrawing(false)
     setStartPosition([0, 0])
   }
 
@@ -65,7 +60,8 @@ export const useCanvasDrawHandlers = (
   return {
     dragStartHandler,
     draggingHandler,
-    dragEndHandler
+    dragEndHandler,
+    escDragging
   }
 
 }

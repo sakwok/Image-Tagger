@@ -18,7 +18,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
     <div className="image-container-wrap">
       <div className="image-wrap">
         <img className="main-image" ref={imageRef} src={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
-        <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} />
+        <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} imageSrc={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
       </div>
     </div>
   )

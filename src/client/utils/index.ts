@@ -115,3 +115,37 @@ export const fileListToArray = fileList => {
     }
     return files
 }
+
+export const calcStartPosition = (startPosition, tempPosition, imageBoundaries) => {
+    let x = 0
+    let y = 0
+    let width = 0
+    let height = 0
+    if (tempPosition[0] < startPosition[0] && tempPosition[1] < startPosition[1]) {
+        x = tempPosition[0] - imageBoundaries.left
+        y = tempPosition[1] - imageBoundaries.top
+        width = startPosition[0] - tempPosition[0]
+        height = startPosition[1] - tempPosition[1]
+    } else if (tempPosition[0] < startPosition[0]) {
+        x = tempPosition[0] - imageBoundaries.left
+        y = startPosition[1] - imageBoundaries.top
+        width = startPosition[0] - tempPosition[0]
+        height = tempPosition[1] - startPosition[1]
+    } else if (tempPosition[1] < startPosition[1]) {
+        x = startPosition[0] - imageBoundaries.left
+        y = tempPosition[1] - imageBoundaries.top
+        width = tempPosition[0] - startPosition[0]
+        height = startPosition[1] - tempPosition[1]
+    } else {
+        x = startPosition[0] - imageBoundaries.left
+        y = startPosition[1] - imageBoundaries.top
+        width = tempPosition[0] - startPosition[0]
+        height = tempPosition[1] - startPosition[1]
+    }
+    return {
+        x,
+        y,
+        width,
+        height
+    }
+}

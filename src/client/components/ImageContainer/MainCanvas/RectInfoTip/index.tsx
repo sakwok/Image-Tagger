@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useState, Fragment } from 'react'
 
 import './style'
 
@@ -19,15 +19,20 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
   const [inputValue, setInputValue] = useState(label)
   const [displayForm, setDisplayForm] = useState(!label)
 
+  const submitLabel = () => {
+    setDisplayForm(false)
+    const cloneDrawnRect = [...drawnRect]
+    cloneDrawnRect[index] = {
+      ...drawnRect[index],
+      label: inputValue
+    }
+    // hideToolTip(index)()
+    setDrawnRect(cloneDrawnRect)
+  }
+
   const handleEnter = e => {
     if (e.keyCode === 13) {
-      setDisplayForm(false)
-      const cloneDrawnRect = [...drawnRect]
-      cloneDrawnRect[index] = {
-        ...drawnRect[index],
-        label: inputValue
-      }
-      setDrawnRect(cloneDrawnRect)
+      submitLabel()
       e.preventDefault()
     }
   }
@@ -47,11 +52,19 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
           </span>
           {
             displayForm ?
-              <input className="label-form"
-                type="text"
-                value={inputValue}
-                onChange={e => setInputValue(e.target.value)} onKeyDown={handleEnter}
-              />
+              <Fragment>
+                <input className="label-form"
+                  type="text"
+                  value={inputValue}
+                  onChange={e => setInputValue(e.target.value)} onKeyDown={handleEnter}
+                />
+                <input
+                  className="label-ok"
+                  type="button"
+                  value="ok"
+                  onClick={() => submitLabel()}
+                />
+              </Fragment>
               : <span className="label-value" onClick={openFormInput} >{label}</span>
           }
         </li>
