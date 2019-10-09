@@ -75,4 +75,3 @@ export const useDisplayUnlabeled = (drawnRect, iconRefs) => {
     })
   }, [drawnRect])
 }
-

@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux'
 import { postUploadLabels } from '@/redux/action/upload'
 
 interface ImageLabelInfo {
-  data: {
+  data: Array<{
     name: string,
     xmin: number,
     ymin: number,
     xmax: number,
     ymax: number
-  }[]
+  }>
   image_name: string
   type: number
   image_width: number

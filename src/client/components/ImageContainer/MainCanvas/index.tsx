@@ -22,7 +22,6 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
   const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ } = canvasItems
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
 
-
   const topLeft = calcStartPosition(startPosition, tempPosition, imageBoundaries)
   if (startPosition[0] === 0 && startPosition[1] === 0) {
     const lastDrawnRect = drawnRect[drawnRect.length - 1]
