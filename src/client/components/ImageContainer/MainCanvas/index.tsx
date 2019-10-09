@@ -1,5 +1,6 @@
 import React, { Fragment, useRef, } from 'react'
 import ReactTooltip from 'react-tooltip'
+import classnames from 'classnames'
 
 import { useCanvasDrawHandlers, useDisplayUnlabeled } from './hooks'
 import Icon from '@/components/Atoms/Icon'
@@ -24,11 +25,9 @@ interface MainCanvasProps {
 export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasItems, imageSrc }) => {
 
   const canvasRef = useRef(null)
-  const { drawnRect, setDrawnRect, startPosition, tempPosition } = canvasItems
+  const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ } = canvasItems
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
-
   const topLeft = calcStartPosition(startPosition, tempPosition, imageBoundaries)
-
   if (startPosition[0] === 0 && startPosition[1] === 0) {
     const lastDrawnRect = drawnRect[drawnRect.length - 1]
     if (lastDrawnRect) {
@@ -51,12 +50,14 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
 
   useDisplayUnlabeled(drawnRect, iconRefs)
 
+  const defaultWidth = 200
+
   const magnRatio = topLeft => {
     let ratio = 5
     const biggest = Math.max(topLeft.width * ratio, topLeft.height * ratio)
 
-    if (biggest > 200) {
-      ratio = 200 / biggest * ratio
+    if (biggest > defaultWidth) {
+      ratio = defaultWidth / biggest * ratio
     }
     return ratio
   }
@@ -84,8 +85,8 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
           top: 0,
           left: imageBoundaries.left + imageBoundaries.width + 10,
           display: 'inline-block',
-          height: '200px',
-          width: '200px',
+          height: `${defaultWidth}px`,
+          width: `${defaultWidth}px`,
           overflow: 'hidden',
           textAlign: 'left'
         }}
@@ -93,7 +94,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
         <span
           style={{
             display: 'inline-block',
-            backgroundImage: !!drawnRect[drawnRect.length - 1] ? `url(${imageSrc})` : 'url()',
+            backgroundImage: (!!drawnRect[drawnRect.length - 1]) || (topLeft.x && topLeft.y) ? `url(${imageSrc})` : 'url()',
             backgroundRepeat: 'no-repeat',
             width: topLeft.width * ratio,
             height: topLeft.height * ratio,
@@ -103,21 +104,25 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
           }}
         />
       </span>
-      <span
-        className="magn-region"
+      <div
+        className="undo-tool-wrap"
         style={{
           position: "absolute",
           top: 210,
           left: imageBoundaries.left + imageBoundaries.width + 10,
-          display: 'inline-block',
-          // height: '200px',
-          // width: '200px',
+          // height: `${defaultWidth}px`,
+          width: `${defaultWidth}px`,
           overflow: 'hidden',
           textAlign: 'left'
         }}
       >
-
-      </span>
+        <div className={classnames("undo-button undo-tool", undoQ.length === 0 && 'tool-disabled')} onClick={setUndoQ}>
+          UNDO
+        </div>
+        <div className={classnames("redo-button undo-tool", redoQ.length === 0 && 'tool-disabled')} onClick={setRedoQ}>
+          REDO
+        </div>
+      </div>
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {
           const icons = (

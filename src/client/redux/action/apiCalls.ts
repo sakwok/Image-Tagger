@@ -63,7 +63,7 @@ export const createCrEtlEndpoint = (endpoint: string) => `/api/etl/v1/cr/${endpo
 
 export const getApiData = (reduxFetchParams: ReduxFetchParams) => (host = false, id = '', params = {}, data = {}, willDispatch = true, limit = 0, offset = 0) => (dispatch, getState) => {
   const { baseReducer = '', stateCategory = '', idCategory = '', additionalData = false } = reduxFetchParams
-  const { [baseReducer]: desiredField } = getState().apiCalls
+  const { [baseReducer]: desiredField } = getState()
   let compiledParams = params
   if (id) {
     if (desiredField && desiredField[id] && desiredField[id][idCategory]) {

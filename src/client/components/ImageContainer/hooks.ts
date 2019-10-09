@@ -31,10 +31,46 @@ export const useCanvasItems = () => {
   const [startPosition, setStartPosition] = useState([0, 0])
   const [tempPosition, setTempPosition] = useState([0, 0])
   const [drawnRect, setDrawnRect] = useState([])
+  const [undoQ, setUndoQ] = useState([])
+  const [redoQ, setRedoQ] = useState([])
+
+  const compileDrawnRect = params => {
+    const copyUndoQ = [...undoQ]
+    copyUndoQ.push(drawnRect)
+    setUndoQ(copyUndoQ)
+    setRedoQ([])
+    setDrawnRect(params)
+  }
+
+  const compileSetUndoQ = () => {
+    if (undoQ.length === 0) return
+    const copyUndoQ = [...undoQ]
+    const undoObject = copyUndoQ.pop()
+    setUndoQ(copyUndoQ)
+    const copyRedoQ = [...redoQ]
+    copyRedoQ.push(drawnRect)
+    setRedoQ(copyRedoQ)
+    setDrawnRect(undoObject)
+  }
+
+  const compileSetRedoQ = () => {
+    if (redoQ.length === 0) return
+    const copyRedoQ = [...redoQ]
+    const redoObject = copyRedoQ.pop()
+    setRedoQ(copyRedoQ)
+    const copyUndoQ = [...undoQ]
+    copyUndoQ.push(drawnRect)
+    setUndoQ(copyUndoQ)
+    setDrawnRect(redoObject)
+  }
 
   return {
     startPosition, setStartPosition,
     tempPosition, setTempPosition,
-    drawnRect, setDrawnRect
+    drawnRect, setDrawnRect: compileDrawnRect,
+    undoQ,
+    redoQ,
+    setUndoQ: compileSetUndoQ,
+    setRedoQ: compileSetRedoQ,
   }
 }

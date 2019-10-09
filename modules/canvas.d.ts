@@ -5,6 +5,10 @@ interface CanvasItems {
   setTempPosition: any
   drawnRect: DrawnRect[]
   setDrawnRect: any
+  undoQ: any
+  setUndoQ: any
+  redoQ: any
+  setRedoQ: any
 }
 
 interface DrawnRect {

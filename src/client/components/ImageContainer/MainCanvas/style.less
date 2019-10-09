@@ -7,6 +7,29 @@
   border: 1px solid @border-color;
 }
 
+.undo-tool-wrap {
+  .flex-align();
+  justify-content: space-around;
+}
+
+.undo-tool {
+  &:hover {
+    background-color: #1890ff;
+    color: white;
+  }
+  border: 1px solid @border-color;
+  width: 100px;
+  cursor: pointer;
+  // width: 49%;
+  text-align: center;
+}
+
+.tool-disabled {
+  pointer-events: none;
+  color: white;
+  background-color: #6c757d;
+}
+
 .rect-pt {
   position: absolute;
   display: inline-block;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { UploadImages } from './UploadImages'
+import { UploadImagesModalContainer } from './UploadImagesModalContainer'
 
 import './style'
 
@@ -24,7 +24,7 @@ export const UploadImagesButton: React.FC<UploadImagesButtonProps> = ({ }) => {
       <div className="upload-img">
         <span className="upload-text" onClick={openModal} >Upload Images</span>
       </div>
-      <UploadImages displayModal={displayModal} closeModal={closeModal} />
+      <UploadImagesModalContainer displayModal={displayModal} closeModal={closeModal} />
     </div>
   )
 }

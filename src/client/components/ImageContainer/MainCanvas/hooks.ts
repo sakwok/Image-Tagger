@@ -42,6 +42,8 @@ export const useCanvasDrawHandlers = (
     }])
     setIsDrawing(false)
     setStartPosition([0, 0])
+    setTempPosition([0, 0])
+
   }
 
   useEffect(() => {
