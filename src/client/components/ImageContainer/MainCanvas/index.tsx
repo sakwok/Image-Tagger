@@ -7,26 +7,22 @@ import Icon from '@/components/Atoms/Icon'
 import { RectInfoTip } from './RectInfoTip/index'
 import { calcStartPosition } from '@/utils/index'
 
+import { SubmitCoordinates } from './SubmitCoordinates/index'
+
 import './style'
 
 interface MainCanvasProps {
-  imageBoundaries: {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-    width: number;
-    height: number;
-  }
+  imageBoundaries: ImageBoundaries
   canvasItems: CanvasItems
   imageSrc: string
 }
 
 export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasItems, imageSrc }) => {
-
   const canvasRef = useRef(null)
   const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ } = canvasItems
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
+
+
   const topLeft = calcStartPosition(startPosition, tempPosition, imageBoundaries)
   if (startPosition[0] === 0 && startPosition[1] === 0) {
     const lastDrawnRect = drawnRect[drawnRect.length - 1]
@@ -105,7 +101,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
         />
       </span>
       <div
-        className="undo-tool-wrap"
+        className="side-bar-wrap"
         style={{
           position: "absolute",
           top: 210,
@@ -116,12 +112,15 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
           textAlign: 'left'
         }}
       >
-        <div className={classnames("undo-button undo-tool", undoQ.length === 0 && 'tool-disabled')} onClick={setUndoQ}>
-          UNDO
+        <div className="undo-tool-wrap">
+          <div className={classnames("undo-button undo-tool", undoQ.length === 0 && 'tool-disabled')} onClick={setUndoQ}>
+            UNDO
+          </div>
+          <div className={classnames("redo-button undo-tool", redoQ.length === 0 && 'tool-disabled')} onClick={setRedoQ}>
+            REDO
+          </div>
         </div>
-        <div className={classnames("redo-button undo-tool", redoQ.length === 0 && 'tool-disabled')} onClick={setRedoQ}>
-          REDO
-        </div>
+        <SubmitCoordinates drawnRect={drawnRect} imageBoundaries={imageBoundaries} />
       </div>
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {

@@ -29,7 +29,6 @@ export const useUploadImages = closeModal => {
       type: 0
     }))
 
-    console.log(allByteArrays)
     setFileList([...fileList, ...filesArray])
   }
 

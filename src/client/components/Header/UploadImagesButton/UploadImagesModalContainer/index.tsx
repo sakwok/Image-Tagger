@@ -29,8 +29,6 @@ export const UploadImagesModalContainer: React.FC<UploadImagesModalContainerProp
     handleInputChange,
     invalidImageIds, } = useUploadImages(closeModal)
 
-  console.log(fileList)
-
   return (
     <Modal
       title="Upload Images"

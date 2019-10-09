@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import ReactTooltip from 'react-tooltip'
+
 import { calcStartPosition } from '@/utils/index'
 
 export const useCanvasDrawHandlers = (
@@ -49,7 +50,6 @@ export const useCanvasDrawHandlers = (
   useEffect(() => {
     const canvasCtx = canvasRef.current.getContext('2d')
     canvasCtx.strokeStyle = 'red'
-    // console.log(startPosition[0] - imageBoundaries.left, startPosition[1] - imageBoundaries.top)
     canvasCtx.clearRect(0, 0, imageBoundaries.width, imageBoundaries.height)
     if (!(startPosition[0] === 0 && startPosition[1] === 0)) {
       canvasCtx.strokeRect(startPosition[0] - imageBoundaries.left, startPosition[1] - imageBoundaries.top, tempPosition[0] - startPosition[0], tempPosition[1] - startPosition[1])
@@ -75,3 +75,4 @@ export const useDisplayUnlabeled = (drawnRect, iconRefs) => {
     })
   }, [drawnRect])
 }
+

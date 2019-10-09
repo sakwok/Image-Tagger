@@ -6,7 +6,7 @@ dotConfig({ path: resolveApp('env/common.env') })
 dotConfig({ path: resolveApp(`env/${NODE_ENV}.env`) })
 const logger = require('./utils/logger').default
 const Koa = require('koa')
-const bodyParser = require('koa-bodyparser')
+// const bodyParser = require('koa-bodyparser')
 const koaBody = require('koa-body')
 const next = require('next')
 const compress = require('koa-compress')
@@ -26,8 +26,8 @@ const setCookieMiddleware = require('./middleware/setCookieMiddleware')
 export default app.prepare()
     .then(() => {
         const server = new Koa()
-        server.use(koaBody({ multipart: true }))
-        server.use(bodyParser())
+        server.use(koaBody({ multipart: true, jsonLimit: '50mb', formLimit: '500kb', textLimit: '500kb' }))
+        // server.use(bodyParser({ formLimit: '500kb', jsonLimit: '50mb', textLimit: '50mb' }))
         server.use(setCookieMiddleware())
         server.use(
             compress({

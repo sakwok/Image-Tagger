@@ -18,3 +18,12 @@ interface DrawnRect {
   height: number
   label: string
 }
+
+interface ImageBoundaries {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+  width: number;
+  height: number;
+}
