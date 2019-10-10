@@ -4,6 +4,7 @@ import FunDataLogo from 'static/vArenaLogo.png'
 import { useDispatch } from 'react-redux'
 
 import { setCurrentDataSet, getImages } from '@/redux/action/images'
+import { getList } from '@/redux/action/list'
 import { UploadImagesButton } from './UploadImagesButton/index'
 
 import './style'
@@ -25,6 +26,7 @@ export const Header: React.FC = () => {
         setMenuText(categories[e.key])
         dispatch(setCurrentDataSet(setId))
         dispatch(getImages(false, `${setId}`, { type: setId }))
+        dispatch(getList(false, `${setId}`, { type: setId }))
     }
 
     const menu = (

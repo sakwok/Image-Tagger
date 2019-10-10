@@ -1,32 +1,47 @@
 import { useEffect, useState } from 'react'
-import { debounce } from 'lodash'
 
 export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
   const [imageBoundaries, setImageBoundaries] = useState({ top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 })
   const [windowDimensions, setWindowDimensions] = useState({ height: window.innerHeight, width: window.innerWidth })
-
+  const [displayCanvas, setDisplayCanvas] = useState(false)
   useEffect(
     () => {
       if (imageRef.current) {
         const imageWrapCoords = imageRef.current.getBoundingClientRect()
         const { top, bottom, left, right, width, height } = imageWrapCoords
-        setImageBoundaries({ top, bottom, left, right, width, height })
+
+        setImageBoundaries(() => {
+          return { top, bottom, left, right, width, height }
+        })
       }
     }
-    , [windowDimensions, currDataSet])
+    , [windowDimensions, currDataSet, imageRef])
 
   useEffect(
     () => {
       const updateWindowDimensions = e => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
-      window.addEventListener('resize', debounce(updateWindowDimensions, 500))
+      window.addEventListener('resize', updateWindowDimensions)
       return window.removeEventListener('resize', updateWindowDimensions)
     }
     , [])
 
+  useEffect(
+    () => {
+      // if (!imageRef.current) setDisplayCanvas(false)
+      console.log('called')
+      console.log(imageBoundaries && imageBoundaries.height !== 0 && imageRef.current)
+      if (imageBoundaries && imageBoundaries.height !== 0 && imageRef.current) {
+        setDisplayCanvas(true)
+      }
+    }, [imageBoundaries, imageRef]
+  )
+
   return {
     imageBoundaries,
-    setImageBoundaries
+    setImageBoundaries,
+    displayCanvas
   }
+
 }
 
 export const useCanvasItems = () => {
@@ -66,6 +81,11 @@ export const useCanvasItems = () => {
     setDrawnRect(redoObject)
   }
 
+  const clearQs = () => {
+    setRedoQ([])
+    setUndoQ([])
+  }
+
   return {
     startPosition, setStartPosition,
     tempPosition, setTempPosition,
@@ -74,5 +94,6 @@ export const useCanvasItems = () => {
     redoQ,
     setUndoQ: compileSetUndoQ,
     setRedoQ: compileSetRedoQ,
+    clearQs
   }
 }

@@ -21,7 +21,7 @@ interface MainCanvasProps {
 
 export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasItems, currPic, currSetIdSet }) => {
   const canvasRef = useRef(null)
-  const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ } = canvasItems
+  const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ, clearQs } = canvasItems
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
 
   const topLeft = calcStartPosition(startPosition, tempPosition, imageBoundaries)
@@ -65,8 +65,8 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
         ref={canvasRef}
         className="main-canvas"
         style={{ top: 0, left: imageBoundaries.left }}
-        width={imageBoundaries.width}
         height={imageBoundaries.height}
+        width={imageBoundaries.width}
         onMouseDown={dragStartHandler}
         onMouseUp={dragEndHandler}
         onMouseMove={draggingHandler}
@@ -121,7 +121,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
             REDO
           </div>
         </div>
-        <SubmitCoordinates drawnRect={drawnRect} imageBoundaries={imageBoundaries} currSetIdSet={currSetIdSet} imageName={currPic.image_name} />
+        <SubmitCoordinates clearQs={clearQs} drawnRect={drawnRect} imageBoundaries={imageBoundaries} currSetIdSet={currSetIdSet} imageName={currPic.image_name} setDrawnRect={setDrawnRect} />
       </div>
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {

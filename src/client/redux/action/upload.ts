@@ -2,7 +2,6 @@ import * as types from '../types/index'
 import { getApiData } from './apiCalls'
 import { removeCompletedImage } from '@/redux/action/images'
 
-
 export const postUploadImages = getApiData({
   url: '/api/v1/label/upload/images',
   baseReducer: '',

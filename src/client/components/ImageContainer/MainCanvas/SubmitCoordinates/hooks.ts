@@ -13,13 +13,14 @@ interface ImageLabelInfo {
   type: number
   image_width: number
   image_height: number
-
 }
 
-export const useUploadImageLabels = (imageLabelInfo: ImageLabelInfo) => {
+export const useUploadImageLabels = (imageLabelInfo: ImageLabelInfo, setDrawnRect, clearQs) => {
   const dispatch = useDispatch()
   const uploadImageLabels = () => {
     dispatch(postUploadLabels(false, '', {}, imageLabelInfo))
+    setDrawnRect([])
+    clearQs()
   }
   return uploadImageLabels
 }

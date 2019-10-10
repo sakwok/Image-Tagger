@@ -9,6 +9,7 @@ interface CanvasItems {
   setUndoQ: any
   redoQ: any
   setRedoQ: any
+  clearQs: any
 }
 
 interface DrawnRect {

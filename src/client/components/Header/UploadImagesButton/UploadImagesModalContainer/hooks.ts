@@ -1,21 +1,17 @@
 import { useState, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fileListToArray } from '@/utils/index'
 import { setUploadedImages } from '@/redux/action/uploadedImages'
 import { postUploadImages } from '@/redux/action/upload'
-import { currSetIdSelector } from '@/redux/selector/images/index'
 
 export const useUploadImages = closeModal => {
   const [fileList, setFileList] = useState([])
   const dispatch = useDispatch()
   const [dropActive, setDropActive] = useState(false)
   const [isNextStep, setIsNextStep] = useState(false)
-  const [imageIds, setImageIds] = useState({})
+  const [imageIds, setImageIds] = useState(0)
 
   const inputUploadRef = useRef(null)
-
-  const currSetIdSet = useSelector(currSetIdSelector)
-
 
   const addFiles = async e => {
     const formFiles = e.target.files
@@ -29,7 +25,7 @@ export const useUploadImages = closeModal => {
     filesArray = filesArray.map(({ name: image_name }, index) => ({
       image_name,
       content: allByteArrays[index],
-      type: 1
+      type: 0
     }))
 
     setFileList([...fileList, ...filesArray])
@@ -95,21 +91,20 @@ export const useUploadImages = closeModal => {
 
   const onModalComplete = () => {
     if (isNextStep) {
-      const numImageIds = Object.keys(imageIds).length
-      if (numImageIds !== fileList.length) {
+      if (!imageIds) {
         return
       }
 
-      const taggedFiles = fileList.map((file, index) => (
+      const taggedFiles = fileList.map(file => (
         {
           ...file,
-          label: imageIds[`imageId${index}`]
+          type: imageIds
         }
       ))
 
       if (fileList.length > 0) {
         dispatch(setUploadedImages(taggedFiles))
-        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: currSetIdSet }))
+        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: imageIds }))
       }
       resetModal()
     } else {
@@ -120,9 +115,7 @@ export const useUploadImages = closeModal => {
   }
 
   const handleInputChange = e => {
-    const imageIdsCopy = { ...imageIds }
-    imageIdsCopy[e.target.name] = e.target.value
-    setImageIds(imageIdsCopy)
+    setImageIds(Number(e.target.value))
   }
 
   return {

@@ -84,7 +84,7 @@ build-test:
    - /^testing/
    - optimization_cicd
    - dev
-
+   - master
 build-prod:
  extends: .build-op
  variables:

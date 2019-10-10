@@ -15,14 +15,16 @@ interface ImageContainerProps {
 export const ImageContainer: React.FC<ImageContainerProps> = ({ currDataSet, currSetIdSet }) => {
 
   const imageRef = useRef(null)
-  const { imageBoundaries } = useInitCanvasBoundaries(imageRef, currDataSet)
+  const { imageBoundaries, displayCanvas } = useInitCanvasBoundaries(imageRef, currDataSet)
   const canvasItems: CanvasItems = useCanvasItems()
+  console.log(displayCanvas)
+  console.log(imageBoundaries)
   return (
     <div className="image-container-wrap">
-      {currDataSet.length ?
+      {(currDataSet.length) ?
         <div className="image-wrap">
           <img className="main-image" ref={imageRef} src={createImgPath(currDataSet[0].image_path)} />
-          <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} currPic={currDataSet[0]} currSetIdSet={currSetIdSet} />
+          {displayCanvas && imageBoundaries && <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} currPic={currDataSet[0]} currSetIdSet={currSetIdSet} />}
         </div>
         : <div className="no-images">No images in this set</div>
       }

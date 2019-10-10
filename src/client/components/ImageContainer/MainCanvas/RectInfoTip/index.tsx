@@ -1,4 +1,7 @@
 import React, { useState, Fragment } from 'react'
+import { useSelector } from 'react-redux'
+
+import { currListSelector } from '@/redux/selector/list/index'
 
 import './style'
 
@@ -18,24 +21,26 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
 
   const [inputValue, setInputValue] = useState(label)
   const [displayForm, setDisplayForm] = useState(!label)
+  const currLabelList = useSelector(currListSelector)
 
-  const submitLabel = () => {
+  const submitLabel = e => {
     setDisplayForm(false)
     const cloneDrawnRect = [...drawnRect]
     cloneDrawnRect[index] = {
       ...drawnRect[index],
-      label: inputValue
+      label: e.target.value
     }
     // hideToolTip(index)()
+    setInputValue(e.target.value)
     setDrawnRect(cloneDrawnRect)
   }
 
-  const handleEnter = e => {
-    if (e.keyCode === 13) {
-      submitLabel()
-      e.preventDefault()
-    }
-  }
+  // const handleEnter = e => {
+  //   if (e.keyCode === 13) {
+  //     submitLabel()
+  //     e.preventDefault()
+  //   }
+  // }
 
   const openFormInput = () => {
     setDisplayForm(true)
@@ -50,8 +55,8 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
   return (
     <div className="rect-info-tip-wrap">
       <ul>
-        <li>X: {x} &nbsp;/&nbsp; Y: {y}</li>
-        <li>Height: {height} &nbsp;/&nbsp; Width: {width}</li>
+        <li>X: {x.toFixed(2)} &nbsp;/&nbsp; Y: {y.toFixed(2)}</li>
+        <li>Height: {height.toFixed(2)} &nbsp;/&nbsp; Width: {width.toFixed(2)}</li>
         <li>
           <span className="label-text" onClick={openFormInput} >
             label: &nbsp;
@@ -59,17 +64,23 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
           {
             displayForm ?
               <Fragment>
-                <input className="label-form"
+                {/* <input className="label-form"
                   type="text"
                   value={inputValue}
                   onChange={e => setInputValue(e.target.value)} onKeyDown={handleEnter}
-                />
-                <input
+                /> */}
+                <select value={inputValue} onChange={submitLabel}>
+                  <option value=''>{' '}</option>
+                  {currLabelList.map((label, index) => (
+                    <option value={label} key={`label-${index}`}>{label}</option>
+                  ))}
+                </select>
+                {/* <input
                   className="label-ok"
                   type="button"
                   value="ok"
-                  onClick={() => submitLabel()}
-                />
+                  onClick={submitLabel}
+                /> */}
               </Fragment>
               : <span className="label-value" onClick={openFormInput} >{label}</span>
           }
