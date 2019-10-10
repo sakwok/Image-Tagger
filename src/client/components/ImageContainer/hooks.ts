@@ -28,8 +28,6 @@ export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
   useEffect(
     () => {
       // if (!imageRef.current) setDisplayCanvas(false)
-      console.log('called')
-      console.log(imageBoundaries && imageBoundaries.height !== 0 && imageRef.current)
       if (imageBoundaries && imageBoundaries.height !== 0 && imageRef.current) {
         setDisplayCanvas(true)
       }

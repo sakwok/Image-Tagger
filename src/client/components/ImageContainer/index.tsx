@@ -17,8 +17,6 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ currDataSet, cur
   const imageRef = useRef(null)
   const { imageBoundaries, displayCanvas, setImageBoundaries } = useInitCanvasBoundaries(imageRef, currDataSet)
   const canvasItems: CanvasItems = useCanvasItems()
-  console.log(displayCanvas)
-  console.log(imageBoundaries)
   return (
     <div className="image-container-wrap">
       {(currDataSet.length) ?

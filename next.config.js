@@ -1,5 +1,4 @@
 const withPlugins = require('next-compose-plugins')
-const withTypescript = require('@zeit/next-typescript')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const path = require('path')
 const humps = require('humps')
@@ -28,7 +27,7 @@ if (typeof require !== 'undefined') {
   require.extensions['.less'] = file => { }
 }
 
-module.exports = withPlugins([withTypescript, [withLess, {
+module.exports = withPlugins([[withLess, {
   lessLoaderOptions: {
     javascriptEnabled: true
   }
