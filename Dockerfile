@@ -29,5 +29,5 @@ WORKDIR /opt
 #RUN npm install next@latest
 
 COPY . /opt
-
+COPY .next /opt
 #RUN npm run build
