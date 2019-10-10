@@ -23,7 +23,7 @@ export const ImageContainer: React.FC<ImageContainerProps> = ({ currDataSet, cur
     <div className="image-container-wrap">
       {(currDataSet.length) ?
         <div className="image-wrap">
-          <img className="main-image" ref={imageRef} src={createImgPath(currDataSet[0].image_path)} />
+          <img className="main-image" style={{ minWidth: '450px', maxWidth: '800px', minHeight: '1px' }} ref={imageRef} src={createImgPath(currDataSet[0].image_path)} />
           {displayCanvas && imageBoundaries && <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} currPic={currDataSet[0]} currSetIdSet={currSetIdSet} />}
         </div>
         : <div className="no-images">No images in this set</div>

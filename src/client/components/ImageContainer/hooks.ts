@@ -10,9 +10,9 @@ export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
         const imageWrapCoords = imageRef.current.getBoundingClientRect()
         const { top, bottom, left, right, width, height } = imageWrapCoords
 
-        setImageBoundaries(() => {
-          return { top, bottom, left, right, width, height }
-        })
+        setImageBoundaries(
+          { top, bottom, left, right, width, height }
+        )
       }
     }
     , [windowDimensions, currDataSet, imageRef])
