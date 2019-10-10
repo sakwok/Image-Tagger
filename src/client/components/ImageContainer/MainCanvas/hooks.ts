@@ -71,7 +71,9 @@ export const useCanvasDrawHandlers = (
 export const useDisplayUnlabeled = (drawnRect, iconRefs) => {
   useEffect(() => {
     iconRefs.forEach((_, index) => {
-      if (!drawnRect[index].label) ReactTooltip.show(iconRefs[index])
+      if (!drawnRect[index].label) {
+        ReactTooltip.show(iconRefs[index])
+      }
     })
   }, [drawnRect])
 }

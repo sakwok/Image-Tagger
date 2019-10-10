@@ -46,7 +46,7 @@ export const reduxFetch = (reduxFetchParams: ReduxFetchParams) => dispatch => {
       batch(() => {
         dispatch({ type: id ? `${type}_${id}_LOADED` : `${type}_LOADED` })
         dispatch({ type: id ? `${type}_${id}_SUCCESS` : `${type}_SUCCESS` })
-        if (id) {
+        if (type) {
           dispatch(shapeData(type, responseData, stateCategory, id, idCategory))
         }
       })

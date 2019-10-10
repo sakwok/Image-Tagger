@@ -2,7 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { useSelector } from 'react-redux'
 
-import { currSetIdSelector } from '@/redux/selector/images/index'
+import { currSetIdSelector, currDataSetSelector } from '@/redux/selector/images/index'
 
 const ImageContainer = dynamic(
     () => import('@/components/ImageContainer/index'),
@@ -12,12 +12,13 @@ const ImageContainer = dynamic(
 import './style.less'
 
 const HomePage: React.FC<any> = () => {
-    const currentDataSet = useSelector(currSetIdSelector)
+    const currSetIdSet = useSelector(currSetIdSelector)
+    const currDataSet = useSelector(currDataSetSelector)
     return (
         <section className='homePage'>
             {
-                currentDataSet ?
-                    <ImageContainer />
+                currSetIdSet ?
+                    <ImageContainer currDataSet={currDataSet} currSetIdSet={currSetIdSet} />
                     :
                     <div className="select-a-set">Please select a data set</div>
             }

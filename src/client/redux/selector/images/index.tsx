@@ -1,9 +1,12 @@
+import { createSelector } from 'reselect'
+
+export const imagesSelector = (state: any) => state.images
 export const currSetIdSelector = (state: any) => state.images.currentSet
 
-// const currDataSetSelector = apiSelector => createSelector(
-//   [currDataSetSelector, currentPlayerSelector],
-//   (player, currPlayer) => {
-//     if (!player || !player[currPlayer]) return null
-//     return player[currPlayer][apiSelector]
-//   }
-// )
+export const currDataSetSelector = createSelector(
+  [currSetIdSelector, imagesSelector],
+  (setId, images) => {
+    if (!images[setId]) return []
+    return images[setId]
+  }
+)

@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import { debounce } from 'lodash'
 
-export const useInitCanvasBoundaries = imageRef => {
+export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
   const [imageBoundaries, setImageBoundaries] = useState({ top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 })
   const [windowDimensions, setWindowDimensions] = useState({ height: window.innerHeight, width: window.innerWidth })
 
   useEffect(
     () => {
-      const imageWrapCoords = imageRef.current.getBoundingClientRect()
-      const { top, bottom, left, right, width, height } = imageWrapCoords
-      setImageBoundaries({ top, bottom, left, right, width, height })
+      if (imageRef.current) {
+        const imageWrapCoords = imageRef.current.getBoundingClientRect()
+        const { top, bottom, left, right, width, height } = imageWrapCoords
+        setImageBoundaries({ top, bottom, left, right, width, height })
+      }
     }
-    , [windowDimensions])
+    , [windowDimensions, currDataSet])
 
   useEffect(
     () => {

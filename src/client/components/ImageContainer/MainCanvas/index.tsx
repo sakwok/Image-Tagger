@@ -6,6 +6,7 @@ import { useCanvasDrawHandlers, useDisplayUnlabeled } from './hooks'
 import Icon from '@/components/Atoms/Icon'
 import { RectInfoTip } from './RectInfoTip/index'
 import { calcStartPosition } from '@/utils/index'
+import { createImgPath } from '@/utils/index'
 
 import { SubmitCoordinates } from './SubmitCoordinates/index'
 
@@ -14,10 +15,11 @@ import './style'
 interface MainCanvasProps {
   imageBoundaries: ImageBoundaries
   canvasItems: CanvasItems
-  imageSrc: string
+  currPic: any
+  currSetIdSet: number
 }
 
-export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasItems, imageSrc }) => {
+export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasItems, currPic, currSetIdSet }) => {
   const canvasRef = useRef(null)
   const { drawnRect, setDrawnRect, startPosition, tempPosition, setRedoQ, setUndoQ, redoQ, undoQ } = canvasItems
   const { draggingHandler, dragEndHandler, dragStartHandler, escDragging } = useCanvasDrawHandlers({ ...canvasItems, imageBoundaries, canvasRef })
@@ -89,7 +91,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
         <span
           style={{
             display: 'inline-block',
-            backgroundImage: (!!drawnRect[drawnRect.length - 1]) || (topLeft.x && topLeft.y) ? `url(${imageSrc})` : 'url()',
+            backgroundImage: (!!drawnRect[drawnRect.length - 1]) || (topLeft.x && topLeft.y) ? `url(${createImgPath(currPic.image_path)})` : 'url()',
             backgroundRepeat: 'no-repeat',
             width: topLeft.width * ratio,
             height: topLeft.height * ratio,
@@ -119,7 +121,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
             REDO
           </div>
         </div>
-        <SubmitCoordinates drawnRect={drawnRect} imageBoundaries={imageBoundaries} />
+        <SubmitCoordinates drawnRect={drawnRect} imageBoundaries={imageBoundaries} currSetIdSet={currSetIdSet} imageName={currPic.image_name} />
       </div>
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {

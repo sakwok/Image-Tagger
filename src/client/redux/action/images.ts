@@ -13,3 +13,7 @@ export const setCurrentDataSet = (setId: number) => ({
     setId
   }
 })
+
+export const removeCompletedImage = () => ({
+  type: types.REMOVE_COMPLETED_IMAGE,
+})

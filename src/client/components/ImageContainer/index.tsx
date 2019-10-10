@@ -3,23 +3,30 @@ import { useInitCanvasBoundaries, useCanvasItems } from './hooks'
 
 import { MainCanvas } from './MainCanvas/index'
 
+import { createImgPath } from '@/utils/index'
+
 import './style'
 
 interface ImageContainerProps {
-
+  currDataSet: any[]
+  currSetIdSet: number
 }
 
-export const ImageContainer: React.FC<ImageContainerProps> = ({ }) => {
+export const ImageContainer: React.FC<ImageContainerProps> = ({ currDataSet, currSetIdSet }) => {
 
   const imageRef = useRef(null)
-  const { imageBoundaries } = useInitCanvasBoundaries(imageRef)
+  const { imageBoundaries } = useInitCanvasBoundaries(imageRef, currDataSet)
   const canvasItems: CanvasItems = useCanvasItems()
   return (
     <div className="image-container-wrap">
-      <div className="image-wrap">
-        <img className="main-image" ref={imageRef} src={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
-        <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} imageSrc={'https://i.gyazo.com/e4aa09bb094a984fb526c7ad808dc6cf.png'} />
-      </div>
+      {currDataSet.length ?
+        <div className="image-wrap">
+          <img className="main-image" ref={imageRef} src={createImgPath(currDataSet[0].image_path)} />
+          <MainCanvas imageBoundaries={imageBoundaries} canvasItems={canvasItems} currPic={currDataSet[0]} currSetIdSet={currSetIdSet} />
+        </div>
+        : <div className="no-images">No images in this set</div>
+      }
+
     </div>
   )
 }

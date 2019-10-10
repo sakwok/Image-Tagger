@@ -12,5 +12,9 @@ export default produce((draft, action) => {
       draft.currentSet = payload.setId
       return
     }
+    case (types.REMOVE_COMPLETED_IMAGE): {
+      draft[draft.currentSet].splice(0, 1)
+      return
+    }
   }
 }, { currentSet: 0 })

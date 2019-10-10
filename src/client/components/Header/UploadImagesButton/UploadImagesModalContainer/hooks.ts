@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fileListToArray } from '@/utils/index'
 import { setUploadedImages } from '@/redux/action/uploadedImages'
 import { postUploadImages } from '@/redux/action/upload'
+import { currSetIdSelector } from '@/redux/selector/images/index'
 
 export const useUploadImages = closeModal => {
   const [fileList, setFileList] = useState([])
@@ -12,6 +13,9 @@ export const useUploadImages = closeModal => {
   const [imageIds, setImageIds] = useState({})
 
   const inputUploadRef = useRef(null)
+
+  const currSetIdSet = useSelector(currSetIdSelector)
+
 
   const addFiles = async e => {
     const formFiles = e.target.files
@@ -102,18 +106,10 @@ export const useUploadImages = closeModal => {
           label: imageIds[`imageId${index}`]
         }
       ))
-      // const taggedFiles = [
-      //   {
-      //     "image_name": "hello",
-      //     "content": [1, 1],
-      //     "type": 1,
-      //     "label": "1"
-      //   }
-      // ]
 
       if (fileList.length > 0) {
         dispatch(setUploadedImages(taggedFiles))
-        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: 1 }))
+        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: currSetIdSet }))
       }
       resetModal()
     } else {
