@@ -39,7 +39,6 @@ compile:
      - build/
      - .next/
      - node_modules/
-     - package.json
    expire_in: 1 hour
  tags:
    - base-runner
