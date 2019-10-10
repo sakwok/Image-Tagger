@@ -10,7 +10,6 @@ export const useUploadImages = closeModal => {
   const [dropActive, setDropActive] = useState(false)
   const [isNextStep, setIsNextStep] = useState(false)
   const [imageIds, setImageIds] = useState({})
-  const [invalidImageIds, setInvalidImageIds] = useState(false)
 
   const inputUploadRef = useRef(null)
 
@@ -26,7 +25,7 @@ export const useUploadImages = closeModal => {
     filesArray = filesArray.map(({ name: image_name }, index) => ({
       image_name,
       content: allByteArrays[index],
-      type: 0
+      type: 1
     }))
 
     setFileList([...fileList, ...filesArray])
@@ -38,7 +37,7 @@ export const useUploadImages = closeModal => {
 
       reader.onload = (event: any) => {
         const arrayBuffer: any = event.target.result
-        resolve(new Int8Array(arrayBuffer))
+        resolve(Array.prototype.slice.call(new Uint8Array(arrayBuffer)))
       }
       reader.readAsArrayBuffer(imgFile)
     })
@@ -86,9 +85,7 @@ export const useUploadImages = closeModal => {
         inputUploadRef.current.value = ''
       }
     }
-    if (invalidImageIds) {
-      setInvalidImageIds(false)
-    }
+
     setIsNextStep(false)
   }
 
@@ -96,7 +93,6 @@ export const useUploadImages = closeModal => {
     if (isNextStep) {
       const numImageIds = Object.keys(imageIds).length
       if (numImageIds !== fileList.length) {
-        setInvalidImageIds(true)
         return
       }
 
@@ -106,10 +102,18 @@ export const useUploadImages = closeModal => {
           label: imageIds[`imageId${index}`]
         }
       ))
+      // const taggedFiles = [
+      //   {
+      //     "image_name": "hello",
+      //     "content": [1, 1],
+      //     "type": 1,
+      //     "label": "1"
+      //   }
+      // ]
 
       if (fileList.length > 0) {
         dispatch(setUploadedImages(taggedFiles))
-        dispatch(postUploadImages(false, '', {}, { data: taggedFiles }))
+        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: 1 }))
       }
       resetModal()
     } else {
@@ -141,6 +145,5 @@ export const useUploadImages = closeModal => {
     isNextStep,
     setIsNextStep,
     handleInputChange,
-    invalidImageIds
   }
 }

@@ -27,10 +27,15 @@ interface ReduxFetchParams extends RequestFace {
 }
 
 export const reduxFetch = (reduxFetchParams: ReduxFetchParams) => dispatch => {
-  const { type, id, stateCategory, idCategory, shapeData = reduxSet, limit, offset } = reduxFetchParams
+  const { type, id, stateCategory, idCategory, shapeData = reduxSet, limit, offset, } = reduxFetchParams
+  const { url, data, host, params, method } = reduxFetchParams
   dispatch({ type: `${type}_${id}_REQUEST` })
   return fetch({
-    ...reduxFetchParams,
+    data,
+    host,
+    url,
+    params,
+    method
   }).then((res: any) => {
     if (res) {
       const responseData = res.data
@@ -41,14 +46,17 @@ export const reduxFetch = (reduxFetchParams: ReduxFetchParams) => dispatch => {
       batch(() => {
         dispatch({ type: id ? `${type}_${id}_LOADED` : `${type}_LOADED` })
         dispatch({ type: id ? `${type}_${id}_SUCCESS` : `${type}_SUCCESS` })
-        dispatch(shapeData(type, responseData, stateCategory, id, idCategory))
+        if (id) {
+          dispatch(shapeData(type, responseData, stateCategory, id, idCategory))
+        }
       })
       return res
+    } else {
+      batch(() => {
+        dispatch({ type: id ? `${type}_${id}_LOADED` : `${type}_LOADED` })
+        dispatch({ type: id ? `${type}_${id}_SUCCESS` : `${type}_FAILURE` })
+      })
     }
-    batch(() => {
-      dispatch({ type: id ? `${type}_${id}_LOADED` : `${type}_LOADED` })
-      dispatch({ type: id ? `${type}_${id}_SUCCESS` : `${type}_FAILURE` })
-    })
   }).catch(e => {
     console.log(e)
     batch(() => {
@@ -66,7 +74,7 @@ export const getApiData = (reduxFetchParams: ReduxFetchParams) => (host = false,
   const { [baseReducer]: desiredField } = getState()
   let compiledParams = params
   if (id) {
-    if (desiredField && desiredField[id] && desiredField[id][idCategory]) {
+    if (desiredField && desiredField[id] && (desiredField[id][idCategory] || !idCategory)) {
       if ((limit && offset) || additionalData) {
         const { limit: stateLimit = 0, offset: stateOffset = 0 } = desiredField[id][idCategory]
         compiledParams = {

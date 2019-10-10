@@ -27,7 +27,7 @@ export const UploadImagesModalContainer: React.FC<UploadImagesModalContainerProp
     removeFile,
     isNextStep,
     handleInputChange,
-    invalidImageIds, } = useUploadImages(closeModal)
+  } = useUploadImages(closeModal)
 
   return (
     <Modal
@@ -52,7 +52,7 @@ export const UploadImagesModalContainer: React.FC<UploadImagesModalContainerProp
             removeAllFiles,
             removeFile
           }} /> :
-          <TagImages fileList={fileList} handleInputChange={handleInputChange} invalidImageIds={invalidImageIds} />
+          <TagImages fileList={fileList} handleInputChange={handleInputChange} />
       }
     </Modal >
 

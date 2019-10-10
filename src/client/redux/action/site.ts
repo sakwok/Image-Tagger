@@ -26,3 +26,4 @@ export const setLanguage = (data: object) => ({
     data
   }
 })
+

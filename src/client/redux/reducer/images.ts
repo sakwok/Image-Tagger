@@ -8,5 +8,9 @@ export default produce((draft, action) => {
       draft[id] = payload
       return
     }
+    case (types.SET_CURRENT_DATA_SET): {
+      draft.currentSet = payload.setId
+      return
+    }
   }
-}, {})
+}, { currentSet: 0 })

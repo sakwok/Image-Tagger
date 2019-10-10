@@ -149,3 +149,5 @@ export const calcStartPosition = (startPosition, tempPosition, imageBoundaries) 
         height
     }
 }
+
+export const createImgPath = (endpoint: string) => `https://vp-test.oss-cn-hangzhou.aliyuncs.com/${endpoint}`
