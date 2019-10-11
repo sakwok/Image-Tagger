@@ -20,26 +20,13 @@
       "es2016"
     ],
     "paths": {
-      "~/*": [
-        "src/*"
-      ],
-      "@/*": [
-        "src/client/*"
-      ],
-      "static/*": [
-        "static/*"
-      ]
+      "~/*": ["src/*"],
+      "@/*": ["src/client/*"]
     },
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
   },
   "exclude": [
     "node_modules",
-    "next.config.js",
+    ".next",
     "**/*.config.js",
     "jest.setup.js",
     "dist",
@@ -47,12 +34,6 @@
     "**/*.spec.tsx",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "postcss.config.js",
     "coverage"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
   ]
 }
