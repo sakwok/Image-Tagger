@@ -94,7 +94,7 @@ module.exports = withPlugins(
               options: {
                 context: '',
                 outputPath: 'static',
-                publicPath: '/_next/static',
+                publicPath: `${(PUBLIC_PATH && PUBLIC_PATH !== '/') ? PUBLIC_PATH : '' }/_next/static`,
                 name: 'assets/[name].[hash].[ext]'
               }
             }
