@@ -2,6 +2,8 @@ image: docker.vpgame.cn/infra/node-1.0-ci-1.2
 
 stages:
   - test
+  - compile
+  - upload
   - build
   - deploy
 
@@ -23,13 +25,46 @@ variables:
 # stage: test
 # script:
 #   - ""
+#
+#compile
+compile:
+ stage: compile
+ image: docker.vpgame.cn/infra/node-1.0-ci-1.2
+ script:
+   - npm i
+   - npm run build
+ artifacts:
+   when: on_success
+   paths:
+     - build/
+     - .next/
+     - node_modules/
+   expire_in: 1 hour
+ tags:
+   - base-runner
+
+#upload oss
+upload:
+ stage: upload
+ dependencies:
+   - compile
+ image: docker.vpgame.cn/infra/python-1.0-ci-1.0
+ script:
+   - cd build
+   - mkdir label-system
+   - cp -r static/* label-system/
+   - python /root/script/upload-oss-multi-site.py label-system
+ tags:
+   - base-runner
+ only:
+   - tags
 
 # Build stage
 
 .build-op:
   stage: build
-  #  dependencies:
-  #    - unittest
+  dependencies:
+    - compile
   image: docker.vpgame.cn/infra/docker-kubectl-1.0
   services:
     - name: docker:dind

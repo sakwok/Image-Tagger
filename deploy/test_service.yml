@@ -9,5 +9,5 @@ spec:
    protocol: TCP
    name: label-system-fe-test-port
  selector:
-   app: us-corp-team-label-system-fe
+   app: us-corp-team-label-system
  type: LoadBalancer

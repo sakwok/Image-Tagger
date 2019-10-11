@@ -39,7 +39,7 @@ spec:
       imagePullSecrets:
         - name: vpsecret
       containers:
-        - name: lvdl-fe
+        - name: label-system-fe
           image: 'docker.vpgame.cn/__PROJECT_NAMESPACE__/__PROJECT_NAME__:__VERSION__'
           command: ["/bin/sh", "-c", "npm run start"]
           imagePullPolicy: Always
