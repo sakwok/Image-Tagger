@@ -1,6 +1,7 @@
 {
   "presets": [
     "next/babel",
+    "@zeit/next-typescript/babel"
   ],
   "plugins": [
     [
@@ -28,19 +29,6 @@
           "transform-react-remove-prop-types",
           {
             "removeImport": true
-          }
-        ],
-        [
-          "module-resolver",
-          {
-            "root": [
-              "./"
-            ],
-            "alias": {
-              "~": "./src",
-              "@": "./src/client",
-              "static": "./static"
-            }
           }
         ]
       ]
