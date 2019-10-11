@@ -2,8 +2,6 @@ image: docker.vpgame.cn/infra/node-1.0-ci-1.2
 
 stages:
   - test
-  - compile
-  - upload
   - build
   - deploy
 

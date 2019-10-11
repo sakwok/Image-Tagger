@@ -10,9 +10,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
   # 添加log目录
   mkdir -p /log/pm2/log /log/pm2/out /log/pm2/err /log/app && \
   # 安装全局npm包
-  # npm i -g pm2@3.5.0 && \
+  npm i -g pm2@3.5.0 && \
   # 安装pm2插件
-  # pm2 install pm2-intercom && pm2 install pm2-logrotate && \
+  pm2 install pm2-intercom && pm2 install pm2-logrotate && \
   # 删除安装缓存
   apk del tzdata && \
 
@@ -20,14 +20,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 WORKDIR /opt
 
-#COPY package.json /opt
+COPY package.json /opt
 
-#RUN npm i
+RUN npm i
 
 #RUN npm install acorn
 
 #RUN npm install next@latest
 
 COPY . /opt
-COPY .next /opt
-#RUN npm run build
+# COPY .next /opt
+RUN npm run build
