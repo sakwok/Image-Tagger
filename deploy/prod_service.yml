@@ -11,7 +11,7 @@ spec:
   - name: label-system-fe-prod-port
     port: 443
     protocol: TCP
-    targetPort: 9997
+    targetPort: 9995
   selector:
     app: us-corp-team-label-system
   sessionAffinity: None
