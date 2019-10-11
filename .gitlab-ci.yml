@@ -28,8 +28,8 @@ variables:
 
 .build-op:
   stage: build
-  dependencies:
-    - compile
+  #  dependencies:
+  #    - unittest
   image: docker.vpgame.cn/infra/docker-kubectl-1.0
   services:
     - name: docker:dind
@@ -49,7 +49,7 @@ build-test:
    - /^testing/
    - optimization_cicd
    - dev
-   - master
+
 build-prod:
  extends: .build-op
  variables:
