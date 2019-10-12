@@ -20,9 +20,19 @@
       "es2016"
     ],
     "paths": {
-      "~/*": ["src/*"],
-      "@/*": ["src/client/*"]
+      "~/*": [
+        "src/*"
+      ],
+      "@/*": [
+        "src/client/*"
+      ]
     },
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules",
@@ -35,5 +45,10 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "coverage"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

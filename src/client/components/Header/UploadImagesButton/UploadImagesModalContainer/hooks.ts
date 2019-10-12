@@ -9,7 +9,7 @@ export const useUploadImages = closeModal => {
   const dispatch = useDispatch()
   const [dropActive, setDropActive] = useState(false)
   const [isNextStep, setIsNextStep] = useState(false)
-  const [imageIds, setImageIds] = useState(0)
+  const [imageIds, setImageIds] = useState(1)
 
   const inputUploadRef = useRef(null)
 
@@ -133,6 +133,7 @@ export const useUploadImages = closeModal => {
     fileList,
     isNextStep,
     setIsNextStep,
+    imageIds,
     handleInputChange,
   }
 }
