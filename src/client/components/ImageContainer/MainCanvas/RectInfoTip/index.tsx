@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
+import Select from "react-dropdown-select"
 
 import { currListSelector } from '@/redux/selector/list/index'
 
@@ -19,19 +20,19 @@ interface RectInfoTipProps {
 
 export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, label, setDrawnRect, index, drawnRect, hideToolTip }) => {
 
-  const [inputValue, setInputValue] = useState(label)
   const [displayForm, setDisplayForm] = useState(!label)
   const currLabelList = useSelector(currListSelector)
-
-  const submitLabel = e => {
+  // console.log(currLabelList)
+  const dropDownoptions = currLabelList.map(label => ({ label }))
+  const submitLabel = value => {
+    const { label } = value[0]
     setDisplayForm(false)
     const cloneDrawnRect = [...drawnRect]
     cloneDrawnRect[index] = {
       ...drawnRect[index],
-      label: e.target.value
+      label
     }
     // hideToolTip(index)()
-    setInputValue(e.target.value)
     setDrawnRect(cloneDrawnRect)
   }
 
@@ -69,12 +70,13 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
                   value={inputValue}
                   onChange={e => setInputValue(e.target.value)} onKeyDown={handleEnter}
                 /> */}
-                <select value={inputValue} onChange={submitLabel}>
+                <Select values={[]} options={dropDownoptions} onChange={submitLabel} />
+                {/* <select value={inputValue} onChange={submitLabel}>
                   <option value=''>{' '}</option>
                   {currLabelList.map((label, index) => (
                     <option value={label} key={`label-${index}`}>{label}</option>
                   ))}
-                </select>
+                </select> */}
                 {/* <input
                   className="label-ok"
                   type="button"
