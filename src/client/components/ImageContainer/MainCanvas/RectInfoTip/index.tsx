@@ -25,15 +25,17 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
   // console.log(currLabelList)
   const dropDownoptions = currLabelList.map(label => ({ label }))
   const submitLabel = value => {
-    const { label } = value[0]
-    setDisplayForm(false)
-    const cloneDrawnRect = [...drawnRect]
-    cloneDrawnRect[index] = {
-      ...drawnRect[index],
-      label
+    if (value[0]) {
+      const { label } = value[0]
+      setDisplayForm(false)
+      const cloneDrawnRect = [...drawnRect]
+      cloneDrawnRect[index] = {
+        ...drawnRect[index],
+        label
+      }
+      // hideToolTip(index)()
+      setDrawnRect(cloneDrawnRect)
     }
-    // hideToolTip(index)()
-    setDrawnRect(cloneDrawnRect)
   }
 
   // const handleEnter = e => {
