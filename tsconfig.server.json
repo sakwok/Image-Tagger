@@ -1,18 +1,27 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "module": "commonjs",
-      "outDir": ".next/dist",
-      "target": "es2017",
-      "sourceMap": false,
-      "lib": [
-        "es2017"
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": ".next/dist",
+    "target": "es2017",
+    "sourceMap": false,
+    "noEmit": false,
+    "lib": [
+      "es2017"
+    ],
+    "paths": {
+      "~/*": [
+        "src/*"
       ],
-      "paths": {
-        "~/*": ["src/*"],
-        "@/*": ["src/client/*"],
-        "static/*": ["static/*"]
-      },
+      "@/*": [
+        "src/client/*"
+      ],
+      "static/*": [
+        "static/*"
+      ]
     },
-    "include": ["src/server/**/*"]
+  },
+  "include": [
+    "src/server/**/*"
+  ]
 }
