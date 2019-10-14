@@ -9,7 +9,7 @@
     "build": "./node_modules/.bin/next build && tsc --project tsconfig.server.json",
     "postbuild": "rimraf build && mkdirp build/static/$npm_package_version/_next/static && cp -r .next/static/* build/static/$npm_package_version/_next/static",
     "lint": "tslint --project tsconfig.json --format codeFrame --fix",
-    "start": "cross-env NODE_ENV=production node /opt/.next/dist/index.js",
+    "start": "cross-env NODE_ENV=production node .next/dist/index.js",
     "server": "pm2 start pm2.config.js --no-daemon",
     "precommit": "npm run lint"
   },

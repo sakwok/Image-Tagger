@@ -32,6 +32,7 @@ compile:
  image: docker.vpgame.cn/infra/node-1.0-ci-1.2
  script:
    - npm i
+   - npm i cross-env dotenv
    - npm run build
  artifacts:
    when: on_success
