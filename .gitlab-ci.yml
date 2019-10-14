@@ -34,7 +34,7 @@ compile:
    - npm i
    - npm i cross-env dotenv
    - npm run build
-   - ls ./next
+   - ls .next
  artifacts:
    when: on_success
    paths:

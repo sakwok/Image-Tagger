@@ -30,6 +30,6 @@ WORKDIR /opt
 
 COPY . /opt
 
-RUN ls -a
+RUN ls .next
 
 #RUN npm run build
