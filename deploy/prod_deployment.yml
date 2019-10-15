@@ -59,6 +59,9 @@ spec:
             requests:
               cpu: 500m
               memory: 500Mi
+          env:
+            - name: NODE_ENV
+              value: production
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

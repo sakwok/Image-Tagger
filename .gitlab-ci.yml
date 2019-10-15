@@ -32,7 +32,9 @@ compile:
  image: docker.vpgame.cn/infra/node-1.0-ci-1.2
  script:
    - npm i
+   - npm i cross-env dotenv
    - npm run build
+   - ls .next
  artifacts:
    when: on_success
    paths:
@@ -145,5 +147,5 @@ deploy-prod:
   only:
   - tags
   tags:
-  - pro-deploy
+  - pro-gcp-runner
 

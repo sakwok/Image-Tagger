@@ -6,3 +6,9 @@ export const getList = getApiData({
   baseReducer: 'list',
   type: types.GET_LABEL_LIST,
 })
+
+export const getAllListTypes = getApiData({
+  url: '/api/v1/label/type/list',
+  baseReducer: 'list',
+  type: types.GET_ALL_LIST_TYPES,
+})

@@ -4,10 +4,10 @@ metadata:
  name: label-system-fe-test
 spec:
  ports:
- - port: 9995
+ - port: 80
    targetPort: 9995
    protocol: TCP
    name: label-system-fe-test-port
  selector:
-   app: us-corp-team-label-system
+   app: us-corp-team-label-system-fe
  type: LoadBalancer
