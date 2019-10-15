@@ -43,22 +43,15 @@ spec:
           image: 'docker.vpgame.cn/__PROJECT_NAMESPACE__/__PROJECT_NAME__:__VERSION__'
           command: ["/bin/sh", "-c", "npm run start"]
           imagePullPolicy: Always
-          resources:
-            limits:
-              cpu: 250m
-              memory: 500Mi
-            requests:
-              cpu: 100m
-              memory: 500Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           resources:
             limits:
               cpu: 250m
-              memory: 500Mi
+              memory: 2048Mi
             requests:
               cpu: 100m
-              memory: 500Mi
+              memory: 1024Mi
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /opt/google_auth/conf/google_auth.json
