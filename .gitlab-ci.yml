@@ -147,5 +147,5 @@ deploy-prod:
   only:
   - tags
   tags:
-  - pro-deploy
+  - pro-gcp-runner
 
