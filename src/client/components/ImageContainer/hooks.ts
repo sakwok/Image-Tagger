@@ -9,7 +9,6 @@ export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
       if (imageRef.current) {
         const imageWrapCoords = imageRef.current.getBoundingClientRect()
         const { top, bottom, left, right, width, height } = imageWrapCoords
-
         setImageBoundaries(
           { top, bottom, left, right, width, height }
         )
@@ -21,7 +20,7 @@ export const useInitCanvasBoundaries = (imageRef, currDataSet) => {
     () => {
       const updateWindowDimensions = e => (setWindowDimensions({ height: e.target.innerHeight, width: e.target.innerWidth }))
       window.addEventListener('resize', updateWindowDimensions)
-      return window.removeEventListener('resize', updateWindowDimensions)
+      // return window.removeEventListener('resize', updateWindowDimensions)
     }
     , [])
 

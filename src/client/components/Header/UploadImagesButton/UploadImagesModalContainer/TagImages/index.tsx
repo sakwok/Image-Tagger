@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import './style'
 
@@ -8,17 +9,19 @@ interface TagImagesProps {
   imageIds: number
 }
 
-const setOptions = new Array(4).fill(1)
+// const setOptions = new Array(4).fill(1)
 
 export const TagImages: React.FC<TagImagesProps> = ({ fileList, handleInputChange, imageIds }) => {
+
+  const setOptions = useSelector((state: any) => state.list.listTypes)
 
   return (
     <div className="tag-images-wrap">
       <div className="tag-images-div">
         <div className="tag-images-text">Tag Image Data Set</div>
         <select onChange={handleInputChange} value={imageIds}>
-          {setOptions.map((_val, index) => (
-            <option value={index + 1} >{index + 1}</option>
+          {setOptions.map((val, index) => (
+            <option key={`opt-${index}`} value={val.type} >{val.name}</option>
           ))}
         </select>
       </div>

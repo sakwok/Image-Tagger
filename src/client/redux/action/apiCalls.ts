@@ -27,7 +27,7 @@ interface ReduxFetchParams extends RequestFace {
 }
 
 export const reduxFetch = (reduxFetchParams: ReduxFetchParams) => dispatch => {
-  const { type, id, stateCategory, idCategory, shapeData = reduxSet, limit, offset, } = reduxFetchParams
+  const { type, id, stateCategory, idCategory = '', shapeData = reduxSet, limit, offset, } = reduxFetchParams
   const { url, data, host, params, method } = reduxFetchParams
   dispatch({ type: `${type}_${id}_REQUEST` })
   return fetch({

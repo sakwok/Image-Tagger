@@ -8,6 +8,10 @@ export default produce((draft, action) => {
       draft[id] = payload
       return
     }
+    case (types.GET_ALL_LIST_TYPES): {
+      draft.listTypes = payload
+      return
+    }
     default: {
       return
     }
