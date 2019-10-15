@@ -13,6 +13,6 @@ spec:
     protocol: TCP
     targetPort: 9995
   selector:
-    app: us-corp-team-label-system
+    app: us-corp-team-label-system-fe
   sessionAffinity: None
   type: LoadBalancer
