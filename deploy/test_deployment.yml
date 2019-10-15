@@ -62,6 +62,8 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /opt/google_auth/conf/google_auth.json
+            - name: NODE_ENV
+              value: development
           volumeMounts:
             - mountPath: /opt/google_auth/conf
               name: google-auth-volume
