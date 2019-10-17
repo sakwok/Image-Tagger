@@ -59,10 +59,21 @@ export const useUploadImages = closeModal => {
     inputUploadRef.current.click()
   }
 
-  const onFileDrop = e => {
+  const onFileDrop = async e => {
     e.preventDefault()
-    const dropFileList = fileListToArray(e.dataTransfer.files)
-    setFileList([...fileList, ...dropFileList])
+    let filesArray = fileListToArray(e.dataTransfer.files)
+    const allByteArrays = []
+    for (const file of filesArray) {
+      const fileByteArray = await getFileByteArray(file)
+      allByteArrays.push(fileByteArray)
+    }
+
+    filesArray = filesArray.map(({ name: image_name }, index) => ({
+      image_name,
+      content: allByteArrays[index],
+      type: 0
+    }))
+    setFileList([...fileList, ...filesArray])
     setDropActive(false)
   }
 
@@ -104,7 +115,8 @@ export const useUploadImages = closeModal => {
 
       if (fileList.length > 0) {
         dispatch(setUploadedImages(taggedFiles))
-        dispatch(postUploadImages(false, '', undefined, { data: taggedFiles, type: imageIds }))
+        const data = { data: taggedFiles, type: imageIds }
+        dispatch(postUploadImages(data))
       }
       resetModal()
     } else {
