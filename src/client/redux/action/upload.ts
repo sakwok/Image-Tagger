@@ -3,8 +3,8 @@ import { getApiData } from './apiCalls'
 import fetch from '@/utils/fetch'
 import { removeCompletedImage } from '@/redux/action/images'
 
-export const postUploadImages = ({ data, type }) => (dispatch) => {
-  let proms = data.map((pic) => {
+export const postUploadImages = ({ data, type }) => dispatch => {
+  const proms = data.map(pic => {
     return (
       fetch({
         method: 'POST',
@@ -18,15 +18,15 @@ export const postUploadImages = ({ data, type }) => (dispatch) => {
   })
 
   Promise.all(proms)
-    .then((values) => {
+    .then(values => {
       console.log(values)
       dispatch({ type: `${types.POST_UPLOAD_IMAGES}_SUCCESS` })
     })
-    .catch((e) => console.log(e))
+    .catch(e => console.log(e))
 }
 
 // getApiData({
-//   
+//
 //   baseReducer: '',
 //   type: types.POST_UPLOAD_IMAGES,
 //   shapeData: undefined,
