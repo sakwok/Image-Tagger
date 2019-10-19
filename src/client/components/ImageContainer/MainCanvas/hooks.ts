@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import ReactTooltip from 'react-tooltip'
+// import ReactTooltip from 'react-tooltip'
 
 import { calcStartPosition } from '@/utils/index'
 
@@ -68,12 +68,29 @@ export const useCanvasDrawHandlers = (
 
 }
 
-export const useDisplayUnlabeled = (drawnRect, iconRefs) => {
+export const useToolTip = (drawnRect, iconRefs, ) => {
+  const [hideTip, setDisplayTip] = useState({})
+
+  const setSingleTip = (tipId, status) => () => {
+    console.log('c;ick')
+    setDisplayTip({
+      ...hideTip,
+      [tipId]: status
+    })
+  }
+
   useEffect(() => {
     iconRefs.forEach((_, index) => {
-      if (!drawnRect[index].label) {
-        ReactTooltip.show(iconRefs[index])
-      }
+      // if (!drawnRect[index].label) {
+      setSingleTip(`rect-pt-${index}`, false)
+      // }
     })
-  }, [drawnRect])
+    setSingleTip(`rect-pt-${iconRefs.length - 1}`, true)
+    // ReactTooltip.show(iconRefs[iconRefs.length - 1])
+  }, [drawnRect, hideTip])
+
+  return {
+    hideTip,
+    setSingleTip
+  }
 }
