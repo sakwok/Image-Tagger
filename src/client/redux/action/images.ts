@@ -17,3 +17,10 @@ export const setCurrentDataSet = (setId: number) => ({
 export const removeCompletedImage = () => ({
   type: types.REMOVE_COMPLETED_IMAGE,
 })
+
+export const setImageRatio = imageRatio => ({
+  type: types.SET_IMAGE_RATIO,
+  payload: {
+    imageRatio
+  }
+})

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, } from 'react'
 import { useSelector } from 'react-redux'
 import Select from "react-dropdown-select"
 
@@ -72,7 +72,7 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
                   value={inputValue}
                   onChange={e => setInputValue(e.target.value)} onKeyDown={handleEnter}
                 /> */}
-                <Select values={[]} options={dropDownoptions} onChange={submitLabel} />
+                <Select values={[]} options={dropDownoptions} onChange={submitLabel} autoFocus />
                 {/* <select value={inputValue} onChange={submitLabel}>
                   <option value=''>{' '}</option>
                   {currLabelList.map((label, index) => (
@@ -91,7 +91,7 @@ export const RectInfoTip: React.FC<RectInfoTipProps> = ({ x, y, height, width, l
         </li>
         <li className="label-delete" onClick={deleteRect} >DELETE</li>
       </ul>
-      <span className="close-tip" onClick={hideToolTip(index)}>X</span>
+      <span className="close-tip" onClick={hideToolTip}>X</span>
     </div>
 
   )

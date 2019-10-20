@@ -1,8 +1,7 @@
 import React, { Fragment, useRef, } from 'react'
-import ReactTooltip from 'react-tooltip'
 import classnames from 'classnames'
 
-import { useCanvasDrawHandlers, useDisplayUnlabeled } from './hooks'
+import { useCanvasDrawHandlers, useToolTip } from './hooks'
 import Icon from '@/components/Atoms/Icon'
 import { RectInfoTip } from './RectInfoTip/index'
 import { calcStartPosition } from '@/utils/index'
@@ -41,12 +40,6 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
     iconRefs.push(ref)
   }
 
-  const hideToolTip = index => () => {
-    ReactTooltip.hide(iconRefs[index])
-  }
-
-  useDisplayUnlabeled(drawnRect, iconRefs)
-
   const defaultWidth = 200
 
   const magnRatio = topLeft => {
@@ -59,6 +52,9 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
     return ratio
   }
   const ratio = magnRatio(topLeft)
+
+  const { hideTip, setSingleTip } = useToolTip(drawnRect, iconRefs)
+
   return (
     <Fragment>
       <canvas
@@ -125,6 +121,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
       </div>
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {
+          const tipId = `rect-pt-${index}`
           const icons = (
             <Fragment key={`pt-${index}`}>
               <Icon
@@ -133,12 +130,20 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
                 className="rect-pt"
                 style={{ top: y - 16, left: imageBoundaries.left + x - 8, fontSize: '16px', height: '16px' }}
                 dataTip={true}
-                dataFor={`rect-pt-${index}`}
+                dataFor={tipId}
                 dataEvent='click focus'
+                onClick={setSingleTip(tipId, false)}
               />
-              <ReactTooltip id={`rect-pt-${index}`} clickable >
-                <RectInfoTip x={x} y={y} label={label} width={width} height={height} drawnRect={drawnRect} setDrawnRect={setDrawnRect} index={index} hideToolTip={hideToolTip} />
-              </ReactTooltip>
+              <div className={classnames('react-tip', hideTip[tipId] && 'hidden-tip')}
+                id={tipId}
+                style={{
+                  position: "absolute",
+                  top: y - 170,
+                  left: imageBoundaries.left + x - 90,
+                }}
+              >
+                <RectInfoTip x={x} y={y} label={label} width={width} height={height} drawnRect={drawnRect} setDrawnRect={setDrawnRect} index={index} hideToolTip={setSingleTip(tipId, true)} />
+              </div>
             </Fragment>)
           return icons
         })

@@ -16,5 +16,9 @@ export default produce((draft, action) => {
       draft[draft.currentSet].splice(0, 1)
       return
     }
+    case (types.SET_IMAGE_RATIO): {
+      draft.imageRatio = payload.imageRatio
+      return
+    }
   }
 }, { currentSet: 0 })
