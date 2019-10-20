@@ -122,8 +122,6 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
       {
         drawnRect.map(({ x, y, label, width, height }, index) => {
           const tipId = `rect-pt-${index}`
-          console.log(hideTip[tipId])
-
           const icons = (
             <Fragment key={`pt-${index}`}>
               <Icon

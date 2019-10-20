@@ -68,7 +68,7 @@ export const useCanvasDrawHandlers = (
 
 }
 
-export const useToolTip = (drawnRect, iconRefs, ) => {
+export const useToolTip = (drawnRect, _iconRefs, ) => {
   const [hideTip, setDisplayTip] = useState({})
 
   const setSingleTip = (tipId, status) => () => {
@@ -80,14 +80,18 @@ export const useToolTip = (drawnRect, iconRefs, ) => {
   }
 
   useEffect(() => {
-    iconRefs.forEach((_, index) => {
+    const final = {}
+    for (let i = 0; i < drawnRect.length - 1; i++) {
       // if (!drawnRect[index].label) {
-      setSingleTip(`rect-pt-${index}`, false)
+      final[`rect-pt-${i}`] = true
       // }
-    })
-    setSingleTip(`rect-pt-${iconRefs.length - 1}`, true)
-    // ReactTooltip.show(iconRefs[iconRefs.length - 1])
-  }, [drawnRect, hideTip])
+      console.log(hideTip)
+      console.log(hideTip[`rect-pt-${i}`], `rect-pt-${i}`)
+    }
+    final[`rect-pt-${drawnRect.length - 1}`] = false
+    setDisplayTip(final)
+
+  }, [drawnRect])
 
   return {
     hideTip,
