@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import classnames from 'classnames'
 
 import { useUploadImageLabels } from './hooks'
@@ -15,8 +16,11 @@ interface SubmitCoordinatesProps {
 }
 
 export const SubmitCoordinates: React.FC<SubmitCoordinatesProps> = ({ drawnRect, imageBoundaries, imageName, currSetIdSet, setDrawnRect, clearQs }) => {
+  const imageRatio = useSelector((state: any) => state.images.imageRatio)
   const uploadImageLabels = useUploadImageLabels({
-    data: drawnRect.map(({ x, y, width, height, label: name }) => ({ xmin: Math.round(x), ymin: Math.round(y), xmax: Math.round(x + width), ymax: Math.round(y + height), name })),
+    data: drawnRect.map(({ x, y, width, height, label: name }) => {
+      return { xmin: Math.round(x / imageRatio), ymin: Math.round(y / imageRatio), xmax: Math.round((x + width) / imageRatio), ymax: Math.round((y + height) / imageRatio), name }
+    }),
     image_name: imageName,
     type: currSetIdSet,
     image_height: Math.round(imageBoundaries.height),
