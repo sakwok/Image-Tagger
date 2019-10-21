@@ -121,6 +121,7 @@ export const getApiData = (reduxFetchParams: ReduxFetchParams) => (host = false,
     params: compiledParams,
     data,
   }
+  console.log(compiledReduxFetchParams)
 
   if (willDispatch) {
     return dispatch(reduxFetch(compiledReduxFetchParams))

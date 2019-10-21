@@ -150,4 +150,4 @@ export const calcStartPosition = (startPosition, tempPosition, imageBoundaries) 
     }
 }
 
-export const createImgPath = (endpoint: string) => `https://vpgame-dl-label.oss-cn-hangzhou.aliyuncs.com/${endpoint}`
+export const createImgPath = (endpoint: string) => `https://vp-test.oss-cn-hangzhou.aliyuncs.com/${endpoint}`

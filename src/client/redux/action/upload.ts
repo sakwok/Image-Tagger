@@ -17,10 +17,10 @@ export const postUploadImages = ({ data, type }) => dispatch => {
     )
   })
 
-  Promise.all(proms)
+  return Promise.all(proms)
     .then(values => {
       console.log(values)
-      dispatch({ type: `${types.POST_UPLOAD_IMAGES}_SUCCESS` })
+      return dispatch({ type: `${types.POST_UPLOAD_IMAGES}_SUCCESS` })
     })
     .catch(e => console.log(e))
 }

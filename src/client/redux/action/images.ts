@@ -1,11 +1,27 @@
 import * as types from '../types/index'
-import { getApiData } from './apiCalls'
+import { reduxSet } from './apiCalls'
+import fetch from '@/utils/fetch'
 
-export const getImages = getApiData({
-  url: '/api/v1/label/images',
-  baseReducer: 'images',
-  type: types.GET_LABEL_IMAGES,
-})
+export const getImages = type => dispatch => {
+  return fetch({
+    url: '/api/v1/label/images',
+    params: {
+      type,
+      limit: 1,
+      offset: 1,
+    }
+  }).then(result => {
+    return dispatch(reduxSet(types.GET_LABEL_IMAGES, result.data, '', type, ''))
+  })
+}
+
+// export const getImages = getApiData({
+//   url: '/api/v1/label/images',
+//   baseReducer: 'images',
+//   type: types.GET_LABEL_IMAGES,
+//   limit: 1,
+//   offset: 1
+// })
 
 export const setCurrentDataSet = (setId: number) => ({
   type: types.SET_CURRENT_DATA_SET,

@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
         const setId = Number(e.key) + 1
         setMenuText(categories[e.key])
         dispatch(setCurrentDataSet(setId))
-        dispatch(getImages(false, `${setId}`, { type: setId }))
+        dispatch(getImages(setId))
         dispatch(getList(false, `${setId}`, { type: setId }))
     }
 
