@@ -11,7 +11,7 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_REGISTRY_PREFIX: docker.vpgame.cn
   APP_NAME: ${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}
-  GROUP_NAME: hy
+  GROUP_NAME: default-pool
   NAMESPACE: default
 
 # Job
