@@ -127,7 +127,7 @@ export const MainCanvas: React.FC<MainCanvasProps> = ({ imageBoundaries, canvasI
               <Icon
                 ref={setRef}
                 type="plus-circle"
-                className="rect-pt"
+                className={classnames("rect-pt", !label && 'unlabeled')}
                 style={{ top: y - 16, left: imageBoundaries.left + x - 8, fontSize: '16px', height: '16px' }}
                 dataTip={true}
                 dataFor={tipId}
