@@ -23,8 +23,8 @@ export const SubmitCoordinates: React.FC<SubmitCoordinatesProps> = ({ drawnRect,
     }),
     image_name: imageName,
     type: currSetIdSet,
-    image_height: Math.round(imageBoundaries.height / imageRatio),
-    image_width: Math.round(imageBoundaries.width / imageRatio),
+    image_height: Math.round(imageBoundaries.height),
+    image_width: Math.round(imageBoundaries.width),
   }, setDrawnRect, clearQs)
   return (
     <div className={classnames("submit-button", !drawnRect.length && 'submit-disabled')} onClick={uploadImageLabels}>
