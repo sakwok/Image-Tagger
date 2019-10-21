@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { postUploadLabels } from '@/redux/action/upload'
+import { getImages } from '@/redux/action/images'
 
 interface ImageLabelInfo {
   data: Array<{
@@ -17,8 +18,10 @@ interface ImageLabelInfo {
 
 export const useUploadImageLabels = (imageLabelInfo: ImageLabelInfo, setDrawnRect, clearQs) => {
   const dispatch = useDispatch()
-  const uploadImageLabels = () => {
-    dispatch(postUploadLabels(false, '', {}, imageLabelInfo))
+  const setId = useSelector((state: any) => state.images.currentSet)
+  const uploadImageLabels = async () => {
+    await Promise.all([dispatch(postUploadLabels(false, '', {}, imageLabelInfo))])
+    await Promise.all([dispatch(getImages(setId))])
     setDrawnRect([])
     clearQs()
   }
