@@ -1,6 +1,6 @@
 {
   "name": "label-system",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "label-system",
   "scripts": {
     "test": "jest",
