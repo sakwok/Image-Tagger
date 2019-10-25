@@ -22,8 +22,8 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "80"
-        prometheus.io/path: /__PROJECT_NAME__/metrics
+        prometheus.io/port: "9999"
+        prometheus.io/path: /metrics
       labels:
         app: __APP_NAME__
     spec:
