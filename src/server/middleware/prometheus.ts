@@ -37,14 +37,14 @@ const prometheusMiddleware = () => {
 
       await next()
 
-      const { method, prometheus } = ctx.request
-      if (prometheus && prometheus.uri) {
-        const duration = Date.now() - start
-        const { status } = ctx.response
+      const { method } = ctx.request
+      // if (prometheus && prometheus.uri) {
+      const duration = Date.now() - start
+      const { status } = ctx.response
 
-        ResponseTime.observe({ uri: prometheus.uri, method }, duration / 1000)
-        RequestCount.inc({ uri: prometheus.uri, method, status }, 1)
-      }
+      ResponseTime.observe({ uri: ctx.request.path, method }, duration / 1000)
+      RequestCount.inc({ uri: ctx.request.path, method, status }, 1)
+      // }
     }
   }
 }
