@@ -22,6 +22,7 @@ const routers = require('./routers/routers').default
 const handler = pageRouters.getRequestHandler(app)
 const apiMiddleware = require('./middleware/apiMiddleware').default
 const setCookieMiddleware = require('./middleware/setCookieMiddleware')
+const prometheusMiddleware = require('./middleware/prometheus').default
 
 export default app.prepare()
     .then(() => {
@@ -45,6 +46,7 @@ export default app.prepare()
                 })
             )
         )
+        server.use(prometheusMiddleware())
         server.use(routers.routes()).use(routers.allowedMethods())
         server.use(apiMiddleware(logger))
         server.use(ctx => {
