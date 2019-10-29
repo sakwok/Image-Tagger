@@ -28,7 +28,7 @@ const RequestCount = new Counter({
 
 const prometheusMiddleware = () => {
   return async (ctx, next) => {
-    collectDefaultMetrics({})
+    collectDefaultMetrics()
 
     if (ctx.request.path === '/metrics' && ctx.method.toLowerCase() === 'get') { // 获取监控信息
       return ctx.body = register.metrics()
