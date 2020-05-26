@@ -30,7 +30,7 @@ export default forwardRef(({
   dataTip,
   dataFor,
   dataEvent
-}: IconInterFace,          ref: any): JSX.Element => {
+}: IconInterFace, ref: any): JSX.Element => {
   const icon = (type ? <i
     style={style}
     onClick={onClick}
